@@ -1,0 +1,9 @@
+fragment MedicalSpecialtiesFragment on MedicalSpecialtiesResponse {
+    id
+    name
+    description
+    isActive
+    createdAt
+    updatedAt
+}
+

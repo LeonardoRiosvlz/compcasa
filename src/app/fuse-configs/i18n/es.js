@@ -1,0 +1,33 @@
+const locale = {
+	CORPORATE_MANAGEMENT: 'Gestión corporativa',
+	TRANSCODE_MANAGEMENT: 'Gestión del transcodificador',
+	MEDICAL_MANAGEMENT: 'Gestión Médica',
+	CONFIGURATION: 'Configuración',
+	USERS: 'Usuarios',
+	USERS_LIST: 'Lista de Usuarios',
+	ROLES: 'Roles',
+	MEMBERSHIP: 'Membresía',
+	DATA_PARAMETERIZATION: 'Parámetros de datos',
+	PATIENT_DATA_SETTINGS:'Conf. Datos del paciente',
+	MEDICAL_SPECIALTIES:'Especialidades médicas',
+	DIAGNOSIS_TYPE:'Tipos De diagnósticos',
+	DIAGNOSIS:'Diagnósticos',
+	PROCEDURES:'Procedimientos',
+	HEADQUARTERS:'Sedes',
+	INDICATIONS_PATIENT:'Indicaciones a pacientes',
+	HABEAS_DATA:'HABEAS Data',
+	INFORMED_CONSENT :'Consentimiento informado',
+	PATIENT_SAFETY_CHECK :'Seguridad del paciente',
+	LABORATORY_EXAMS :'Examenes',
+	MEDICINES :'Medicamentos',
+	PATHOLOGIES :'Patologías',
+	POSITIONS: 'Cargos',
+	AREAS: 'Áreas',
+	TRANSCODER: 'Transcodificador',
+	FFMPG_OPTIONS: 'Opciones Ffmpg',
+	FFMPG: 'Ffmpeg',
+	FFMPG_TEMPLATE: 'Plantillas Ffmpeg',
+	
+};
+
+export default locale;

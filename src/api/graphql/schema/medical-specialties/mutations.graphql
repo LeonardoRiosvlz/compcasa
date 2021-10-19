@@ -1,0 +1,16 @@
+mutation createMedicalSpecialties($input: CreateMedicalSpecialtiesInput!){
+    createMedicalSpecialties(input: $input)
+}
+
+mutation updateMedicalSpecialties($input: UpdateMedicalSpecialtiesInput!){
+    updateMedicalSpecialties(input: $input)
+}
+
+mutation deleteMedicalSpecialties($input: DeleteMedicalSpecialtiesInput!){
+    deleteMedicalSpecialties(input: $input)
+}
+
+mutation deleteManyMedicalSpecialties($input: DeleteManyMedicalSpecialtiesInput!){
+    deleteManyMedicalSpecialties(input: $input)
+}
+

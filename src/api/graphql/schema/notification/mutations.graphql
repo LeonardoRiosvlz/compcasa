@@ -1,0 +1,12 @@
+mutation deleteNotification($input: DeleteNotificationInput!){
+    deleteNotification(input: $input)
+}
+
+mutation deleteManyNotification($input: DeleteManyNotificationInput!){
+    deleteManyNotification(input: $input)
+}
+
+mutation updateNotification($input: UpdateNotificationInput!){
+    updateNotification(input: $input)
+}
+

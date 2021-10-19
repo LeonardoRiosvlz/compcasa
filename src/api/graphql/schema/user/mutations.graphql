@@ -1,0 +1,66 @@
+
+mutation sigIn($input: SignInInput!){
+    signIn(input: $input){
+        access_token
+        roles{
+            ...AuthRoleFragment
+        }
+        providerData{
+            provider
+            thirdPartyId
+        }
+        user{
+            avatarFile{
+                key
+                url
+            }
+            email
+            firstname
+            lastname
+            roles{
+                ...AuthRoleFragment
+            }
+            userId
+            isActive
+            isAdmin
+            username
+            verified
+        }
+    }
+}
+
+mutation createUser($input: CreateUserInput!){
+    createUser(input: $input)
+}
+
+mutation deleteUser($input: DeleteUserInput!){
+    deleteUser(input: $input)
+}
+
+mutation deleteManyUser($input: DeleteManyUserInput!){
+    deleteManyUser(input: $input)
+}
+
+mutation updateUser($input: UpdateUserInput!){
+    updateUser(input: $input)
+}
+
+
+mutation updateMe($input: UpdateMeInput!){
+    updateMe(input: $input)
+}
+
+
+mutation resetPassword($input: ResetPasswordInput!){
+    resetPassword(input: $input)
+}
+
+mutation changePassword($input: ChangePasswordInput!){
+    changePassword(input: $input)
+}
+
+mutation forgotPassword($input: ForgotPasswordInput!){
+    forgotPassword(input: $input)
+}
+
+

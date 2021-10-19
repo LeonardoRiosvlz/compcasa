@@ -1,0 +1,4 @@
+mutation createUploadedFile($input: CreateUploadedFileInput!){
+    createUploadedFile(input: $input)
+}
+

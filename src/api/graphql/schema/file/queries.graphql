@@ -1,0 +1,30 @@
+query getSignedUrl($input: GetUploadSignedUrlInput! ){
+    getWriteSignedUrl(input: $input){
+        key
+        url
+    }
+}
+
+
+query getPaginatedFiles($input: GetPaginatedFilesInput! ){
+    getPaginatedFiles(input: $input){
+        total
+        totalPages
+        limit
+        currentPage
+        items{
+            ...FileFragment
+        }
+    }
+}
+
+
+
+query getOneFiles($input: GetOneFilesInput! ){
+    getOneFiles(input: $input){
+        ...FileFragment
+    }
+}
+
+
+

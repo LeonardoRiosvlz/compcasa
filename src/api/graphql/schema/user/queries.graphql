@@ -1,0 +1,45 @@
+#import "./fragments.schema"
+
+query getPaginatedUser($input: GetPaginatedUsersInput! ){
+    getPaginatedUser(input:  $input){
+        currentPage
+        limit
+        totalPages
+        total
+        items{
+            ...UserFragment
+        }
+    }
+}
+
+query getAllUsers($input: GetAllUsersInput! ){
+    getAllUsers(input:  $input){
+        ...UserFragment
+    }
+}
+
+query getOneUser($input: GetOneUserInput! ){
+    getOneUser(input: $input){
+        ...UserFragment
+    }
+}
+
+
+
+query myInfo {
+    myInfo {
+        ...AuthUserFragment
+    }
+}
+
+query getMyProfile {
+    getMyProfile {
+        ...ProfileFragment
+    }
+}
+
+query getUserProfile($userId: ID!) {
+    getUserProfile(userId: $userId) {
+        ...ProfileFragment
+    }
+}

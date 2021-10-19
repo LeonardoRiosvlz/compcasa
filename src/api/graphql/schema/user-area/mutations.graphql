@@ -1,0 +1,16 @@
+mutation createUserArea($input: CreateUserAreaInput!){
+    createUserArea(input: $input)
+}
+
+mutation updateUserArea($input: UpdateUserAreaInput!){
+    updateUserArea(input: $input)
+}
+
+mutation deleteUserArea($input: DeleteUserAreaInput!){
+    deleteUserArea(input: $input)
+}
+
+mutation deleteManyUserArea($input: DeleteManyUserAreaInput!){
+    deleteManyUserArea(input: $input)
+}
+

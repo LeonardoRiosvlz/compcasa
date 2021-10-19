@@ -1,0 +1,15 @@
+fragment FileFragment on FilesResponse {
+    id
+    bytes
+    filename
+    key
+    status
+    storage
+    url
+    createdAt
+    updatedAt
+}
+
+
+
+

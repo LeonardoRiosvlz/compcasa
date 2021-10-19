@@ -1,0 +1,16 @@
+mutation createUserPosition($input: CreateUserPositionInput!){
+    createUserPosition(input: $input)
+}
+
+mutation updateUserPosition($input: UpdateUserPositionInput!){
+    updateUserPosition(input: $input)
+}
+
+mutation deleteUserPosition($input: DeleteUserPositionInput!){
+    deleteUserPosition(input: $input)
+}
+
+mutation deleteManyUserPosition($input: DeleteManyUserPositionInput!){
+    deleteManyUserPosition(input: $input)
+}
+

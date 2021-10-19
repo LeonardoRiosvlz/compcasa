@@ -1,0 +1,32 @@
+fragment RoleFragment on RoleResponse {
+    id
+    name
+    description
+    permits{
+        ...PermitFragment
+    }
+    createdAt
+    updatedAt
+}
+
+fragment PermitFragment on PermitsResponse {
+    action
+    module
+
+}
+
+
+fragment AuthRoleFragment on AuthRoleResponse {
+    id
+    name
+    permits{
+        ...PermitFragment
+    }
+}
+
+fragment AvailablePermitsFragment on AvailablePermitsResponse {
+    actions
+    module
+}
+
+

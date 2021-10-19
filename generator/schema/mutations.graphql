@@ -1,0 +1,16 @@
+mutation create__name__($input: Create__name__Input!){
+    create__name__(input: $input)
+}
+
+mutation update__name__($input: Update__name__Input!){
+    update__name__(input: $input)
+}
+
+mutation delete__name__($input: Delete__name__Input!){
+    delete__name__(input: $input)
+}
+
+mutation deleteMany__name__($input: DeleteMany__name__Input!){
+    deleteMany__name__(input: $input)
+}
+

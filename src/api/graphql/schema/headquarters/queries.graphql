@@ -1,0 +1,24 @@
+query getAllHeadquarters($input: GetAllHeadquartersInput! ){
+    getAllHeadquarters(input: $input){
+        ...HeadquartersFragment
+    }
+}
+
+query getPaginatedHeadquarters($input: GetPaginatedHeadquartersInput!){
+    getPaginatedHeadquarters(input: $input){
+        total
+        totalPages
+        currentPage
+        items{
+            ...HeadquartersFragment
+        }
+    }
+}
+
+query getOneHeadquarters($input: GetOneHeadquartersInput! ){
+    getOneHeadquarters(input: $input){
+        ...HeadquartersFragment
+    }
+}
+
+

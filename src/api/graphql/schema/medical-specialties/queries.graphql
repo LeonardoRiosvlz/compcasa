@@ -1,0 +1,24 @@
+query getAllMedicalSpecialties($input: GetAllMedicalSpecialtiesInput! ){
+    getAllMedicalSpecialties(input: $input){
+        ...MedicalSpecialtiesFragment
+    }
+}
+
+query getPaginatedMedicalSpecialties($input: GetPaginatedMedicalSpecialtiesInput!){
+    getPaginatedMedicalSpecialties(input: $input){
+        total
+        totalPages
+        currentPage
+        items{
+            ...MedicalSpecialtiesFragment
+        }
+    }
+}
+
+query getOneMedicalSpecialties($input: GetOneMedicalSpecialtiesInput! ){
+    getOneMedicalSpecialties(input: $input){
+        ...MedicalSpecialtiesFragment
+    }
+}
+
+

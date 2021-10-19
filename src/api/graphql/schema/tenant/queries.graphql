@@ -1,0 +1,11 @@
+query getAllTenant($input: GetAllTenantsInput! ){
+    getAllTenant(input: $input){
+        ...TenantFragment
+    }
+}
+
+query getAllSimplifiedTenantsInfo($input: GetAllTenantsInput!){
+    getAllSimplifiedTenantsInfo(input: $input){
+        ...SimplifiedTenantFragment
+    }
+}

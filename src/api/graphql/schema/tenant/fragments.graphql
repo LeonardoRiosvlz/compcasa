@@ -1,0 +1,35 @@
+fragment TenantFragment on TenantResponse {
+    id
+    name
+    code
+    isActive
+    info {
+        email
+        country
+        nit
+        webSite
+        description
+        address
+        phoneNumber
+        currency
+        responsible{
+            email
+            firstname
+            lastname
+            phoneNumber
+        }
+        logoFile {
+            ...CloudFileFragment
+        }
+    }
+
+    createdAt
+    updatedAt
+
+}
+
+fragment SimplifiedTenantFragment on SimplifiedTenantResponse {
+    id
+    name    
+    code
+}

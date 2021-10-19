@@ -1,0 +1,16 @@
+fragment HeadquartersFragment on HeadquartersResponse {
+    id
+    name
+    code
+    city
+    email
+    phoneNumber
+    address
+    manager{
+        ...SolvedEntityFragment
+    }
+    isActive
+    createdAt
+    updatedAt
+}
+

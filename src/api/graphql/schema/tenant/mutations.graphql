@@ -1,0 +1,11 @@
+mutation createTenant($input: CreateTenantInput!){
+    createTenant(input: $input)
+}
+
+mutation updateTenant($input: UpdateTenantInput!){
+    updateTenant(input: $input)
+}
+
+mutation deleteTenant($input: DeleteTenantInput!){
+    deleteTenant(input: $input)
+}

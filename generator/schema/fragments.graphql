@@ -1,0 +1,8 @@
+fragment __name__Fragment on __name__Response {
+    id
+    name
+    description
+    createdAt
+    updatedAt
+}
+

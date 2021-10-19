@@ -1,0 +1,45 @@
+overwrite: true
+
+schema: "http://localhost:4000/graphql"
+
+documents: "src/api/graphql/schema/**/*.graphql"
+
+generates:
+
+  schema.graphql:
+    plugins:
+      - schema-ast
+    config:
+      commentDescriptions: true
+
+  src/api/graphql/schema/types.ts:
+    plugins:
+      - typescript
+    config:
+      skipTypename: true
+
+  src/api/graphql/schema/:
+    preset: near-operation-file
+    presetConfig:
+      extension: .generated.ts
+      baseTypesPath: types.ts
+      folder: generated
+    plugins:
+      - "typescript-react-apollo"
+      - "typescript-operations"
+    config:
+      withComponent: false
+      withHOC: true
+      withHooks: true
+      withMutationFn: true
+      skipTypename: true
+
+config:
+  querySuffix: "QueryService"
+  mutationSuffix: "MutationService"
+  subscriptionSuffix: "SubscriptionService"
+
+hooks:
+  afterAllFileWrite:
+ #   - prettier --write
+#    - yarn lint

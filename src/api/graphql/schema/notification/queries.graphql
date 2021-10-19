@@ -1,0 +1,19 @@
+query getPaginatedNotifications($input: GetPaginatedNotificationInput! ){
+    getPaginatedNotification(input: $input){
+        totalPages
+        currentPage
+        limit
+        total
+        items{
+            ...NotificationFragment
+        }
+    }
+}
+
+query getNotifications($input: GetAllNotificationInput! ){
+    getAllNotification(input: $input){
+        ...NotificationFragment
+    }
+}
+
+

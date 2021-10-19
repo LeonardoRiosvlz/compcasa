@@ -1,0 +1,13 @@
+fragment NotificationFragment on NotificationResponse {
+    id
+    message{
+        es
+        en
+    }
+    type
+    toUser{
+        ...SolvedEntityFragment
+    }
+    isRead
+    createdAt
+}

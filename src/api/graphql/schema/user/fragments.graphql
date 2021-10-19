@@ -1,0 +1,61 @@
+
+fragment UserFragment on UserResponse {
+    id
+    email
+    firstname
+    isActive
+    lastname
+    roles{
+        ...SolvedEntityFragment
+    }
+    verified
+    username
+    avatarFile{
+        ...CloudFileFragment
+    }
+    profile {
+        ...ProfileFragment
+    }
+}
+
+fragment ProfileFragment on ProfileResponse {
+    aboutMe
+    birthDay
+    country
+    city
+    gender
+    personalWeb
+    address
+    state
+    zipCode
+    phoneNumber
+    btcWallet
+    tronWallet
+    area{
+        ...SolvedEntityFragment
+    }
+    position{
+        ...SolvedEntityFragment
+    }
+
+}
+
+fragment AuthUserFragment on AuthUserResponse {
+    email
+    firstname
+    lastname
+    isActive
+    isAdmin
+    roles{
+        ...AuthRoleFragment
+    }
+    userId
+    username
+    verified
+    avatarFile{
+        ...CloudFileFragment
+    }
+
+}
+
+

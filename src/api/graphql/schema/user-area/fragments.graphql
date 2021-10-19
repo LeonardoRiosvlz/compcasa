@@ -1,0 +1,9 @@
+fragment UserAreaFragment on UserAreaResponse {
+    id
+    name
+    isActive
+    description
+    createdAt
+    updatedAt
+}
+

@@ -1,0 +1,16 @@
+mutation createHeadquarters($input: CreateHeadquartersInput!){
+    createHeadquarters(input: $input)
+}
+
+mutation updateHeadquarters($input: UpdateHeadquartersInput!){
+    updateHeadquarters(input: $input)
+}
+
+mutation deleteHeadquarters($input: DeleteHeadquartersInput!){
+    deleteHeadquarters(input: $input)
+}
+
+mutation deleteManyHeadquarters($input: DeleteManyHeadquartersInput!){
+    deleteManyHeadquarters(input: $input)
+}
+

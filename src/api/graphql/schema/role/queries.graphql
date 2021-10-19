@@ -1,0 +1,29 @@
+query getAllRole($input: GetAllRoleInput! ){
+    getAllRole(input: $input){
+        ...RoleFragment
+    }
+}
+
+query getPaginatedRole($input: GetPaginatedRoleInput!){
+    getPaginatedRole(input: $input){
+        total
+        totalPages
+        currentPage
+        items{
+            ...RoleFragment
+        }
+    }
+}
+
+query getOneRole($input: GetOneRoleInput! ){
+    getOneRole(input: $input){
+        ...RoleFragment
+    }
+}
+
+
+query getAvailablePermits{
+    getAvailablePermits{
+        ...AvailablePermitsFragment
+    }
+}

@@ -1,0 +1,21 @@
+fragment SolvedEntityFragment on SolvedEntityResponse {
+    id
+    identifier
+    entityName
+    fields{
+        field
+        value
+    }
+}
+
+fragment CloudFileFragment on CloudFileResponse {
+    id
+    key
+    url
+}
+
+fragment CloudFileIdFragment on CloudFileIdResponse {
+    key
+    url
+}
+

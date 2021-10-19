@@ -1,0 +1,24 @@
+query getAllUserPosition($input: GetAllUserPositionInput! ){
+    getAllUserPosition(input: $input){
+        ...UserPositionFragment
+    }
+}
+
+query getPaginatedUserPosition($input: GetPaginatedUserPositionInput!){
+    getPaginatedUserPosition(input: $input){
+        total
+        totalPages
+        currentPage
+        items{
+            ...UserPositionFragment
+        }
+    }
+}
+
+query getOneUserPosition($input: GetOneUserPositionInput! ){
+    getOneUserPosition(input: $input){
+        ...UserPositionFragment
+    }
+}
+
+

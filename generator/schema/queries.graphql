@@ -1,0 +1,24 @@
+query getAll__name__($input: GetAll__name__Input! ){
+    getAll__name__(input: $input){
+        ...__name__Fragment
+    }
+}
+
+query getPaginated__name__($input: GetPaginated__name__Input!){
+    getPaginated__name__(input: $input){
+        total
+        totalPages
+        currentPage
+        items{
+            ...__name__Fragment
+        }
+    }
+}
+
+query getOne__name__($input: GetOne__name__Input! ){
+    getOne__name__(input: $input){
+        ...__name__Fragment
+    }
+}
+
+
