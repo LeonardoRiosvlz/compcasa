@@ -1,0 +1,16 @@
+mutation createPatient($input: CreatePatientInput!){
+    createPatient(input: $input)
+}
+
+mutation updatePatient($input: UpdatePatientInput!){
+    updatePatient(input: $input)
+}
+
+mutation deletePatient($input: DeletePatientInput!){
+    deletePatient(input: $input)
+}
+
+mutation deleteManyPatient($input: DeleteManyPatientInput!){
+    deleteManyPatient(input: $input)
+}
+

@@ -105,21 +105,13 @@ const navigationConfig: Array<MenuItem> = [
                 exact: true
             },
             {
-                id: App_Modules.Users,
-                title: 'Data Parameterization',
-                translate: 'DATA_PARAMETERIZATION',
+                id: App_Modules.Patient,
+                title: 'Data Patient',
+                translate: 'PATIENT',
                 type: 'item',
-                url: '/user/roles',
+                url: '/patient',
                 exact: true
-            },
-            {
-                id: App_Modules.Users,
-                title: 'Patient Data Settings',
-                translate: 'PATIENT_DATA_SETTINGS',
-                type: 'item',
-                url: '/user/roles',
-                exact: true
-            }      
+            }    
         ]
     },
     {

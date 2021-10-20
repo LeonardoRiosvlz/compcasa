@@ -41,19 +41,21 @@ export enum App_Modules {
   Notifications = 'NOTIFICATIONS',
   Setting = 'SETTING',
   Membership = 'MEMBERSHIP',
-  DataParameterization = 'DATA_PARAMETERIZATION',
-  PatientDataSettings = 'PATIENT_DATA_SETTINGS',
   MedicalSpecialties = 'MEDICAL_SPECIALTIES',
-  DiagnosisType = 'DIAGNOSIS_TYPE',
-  Diagnosis = 'DIAGNOSIS',
-  IndicationsPatient = 'INDICATIONS_PATIENT',
-  Procedures = 'PROCEDURES',
-  HabeasData = 'HABEAS_DATA',
-  InformedConsent = 'INFORMED_CONSENT',
-  PatientSafetyCheck = 'PATIENT_SAFETY_CHECK',
-  LaboratoryExams = 'LABORATORY_EXAMS',
-  Medicines = 'MEDICINES',
-  Pathologies = 'PATHOLOGIES'
+  DataParameterization = 'DATA_PARAMETERIZATION',
+  Patient = 'PATIENT',
+  MedicalRecords = 'MEDICAL_RECORDS',
+  QuickMedicalHistory = 'QUICK_MEDICAL_HISTORY',
+  PharmacologicalManagement = 'PHARMACOLOGICAL_MANAGEMENT',
+  QuickComprehensiveManagement = 'QUICK_COMPREHENSIVE_MANAGEMENT',
+  QuickParaclinicsEvaluations = 'QUICK_PARACLINICS_EVALUATIONS',
+  QuickPhysicalExam = 'QUICK_PHYSICAL_EXAM'
+}
+
+export enum AffiliateType {
+  Quote = 'QUOTE',
+  Beneficiary = 'BENEFICIARY',
+  Additional = 'ADDITIONAL'
 }
 
 export type AuthProviderDataResponse = {
@@ -106,24 +108,6 @@ export type CloudFileResponse = {
   url?: Maybe<Scalars['String']>;
 };
 
-export type CreateDataParameterizationInput = {
-  paymentDeadlines: Scalars['Float'];
-  deadlineForPaymentReminder: Scalars['Float'];
-  deadlineForAppointmentReminder: Scalars['Float'];
-};
-
-export type CreateDiagnosisInput = {
-  code: Scalars['String'];
-  description?: Maybe<Scalars['String']>;
-  isActive?: Maybe<Scalars['Boolean']>;
-};
-
-export type CreateDiagnosisTypeInput = {
-  name: Scalars['String'];
-  description?: Maybe<Scalars['String']>;
-  isActive?: Maybe<Scalars['Boolean']>;
-};
-
 export type CreateFilesInput = {
   url: Scalars['String'];
   key: Scalars['String'];
@@ -131,11 +115,6 @@ export type CreateFilesInput = {
   bytes?: Maybe<Scalars['Float']>;
   storage: FileStorageType;
   status: FileStatus;
-};
-
-export type CreateHabeasDataInput = {
-  description: Scalars['String'];
-  isActive?: Maybe<Scalars['Boolean']>;
 };
 
 export type CreateHeadquartersInput = {
@@ -149,21 +128,11 @@ export type CreateHeadquartersInput = {
   isActive?: Maybe<Scalars['Boolean']>;
 };
 
-export type CreateIndicationsPatientInput = {
+export type CreateMedicalRecordsInput = {
+  quickMedicalHistory?: Maybe<Scalars['ID']>;
+  patient?: Maybe<Scalars['ID']>;
+  medicalRecordType?: Maybe<MedicalRecordType>;
   description: Scalars['String'];
-  isActive?: Maybe<Scalars['Boolean']>;
-};
-
-export type CreateInformedConsentInput = {
-  name: Scalars['String'];
-  description?: Maybe<Scalars['String']>;
-  isActive?: Maybe<Scalars['Boolean']>;
-};
-
-export type CreateLaboratoryExamsInput = {
-  code: Scalars['String'];
-  description?: Maybe<Scalars['String']>;
-  isActive?: Maybe<Scalars['Boolean']>;
 };
 
 export type CreateMedicalSpecialtiesInput = {
@@ -172,120 +141,90 @@ export type CreateMedicalSpecialtiesInput = {
   isActive?: Maybe<Scalars['Boolean']>;
 };
 
-export type CreateMedicinesInput = {
-  code: Scalars['String'];
-  description?: Maybe<Scalars['String']>;
-  isActive?: Maybe<Scalars['Boolean']>;
+export type CreatePatientInput = {
+  lastName?: Maybe<Scalars['String']>;
+  firstName?: Maybe<Scalars['String']>;
+  firstSurName?: Maybe<Scalars['String']>;
+  lastSurName?: Maybe<Scalars['String']>;
+  dateOfBirth?: Maybe<Scalars['String']>;
+  gender?: Maybe<UserGender>;
+  documentType: DocumentType;
+  documentNumber: Scalars['String'];
+  placeOfBirth?: Maybe<Scalars['String']>;
+  linkedType?: Maybe<LinkedType>;
+  maritalStatus?: Maybe<MaritalStatus>;
+  affiliateType?: Maybe<AffiliateType>;
+  insuranceType?: Maybe<InsuranceType>;
+  insuranceName?: Maybe<Scalars['String']>;
+  homeAddress?: Maybe<Scalars['String']>;
+  neighborhood?: Maybe<Scalars['String']>;
+  municipality?: Maybe<Scalars['String']>;
+  homePhone?: Maybe<Scalars['String']>;
+  officePhone?: Maybe<Scalars['String']>;
+  occupation?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
 };
 
-export type CreateMembershipInput = {
-  cost?: Maybe<Scalars['Float']>;
-  validity?: Maybe<TaxType>;
-  daysAfterExpired?: Maybe<Scalars['Int']>;
-  voiceTranscription?: Maybe<Scalars['Boolean']>;
-  limitedNumberPatients?: Maybe<Scalars['Boolean']>;
-  limitPatients?: Maybe<Scalars['Int']>;
-  useLogo?: Maybe<Scalars['Boolean']>;
-  limitedNumberHeadquarters?: Maybe<Scalars['Boolean']>;
-  limitHeadquarters?: Maybe<Scalars['Int']>;
-  administrativeUserQuantity?: Maybe<Scalars['Int']>;
-  medicalUserQuantity?: Maybe<Scalars['Int']>;
-  sendingEmailMedicalPrescription?: Maybe<Scalars['Boolean']>;
-  sendingWhatsappMedicalPrescription?: Maybe<Scalars['Boolean']>;
-  generateConsentDigitally?: Maybe<Scalars['Boolean']>;
-  schedulingAppointmentsWeb?: Maybe<Scalars['Boolean']>;
-  appointmentWotificationWhatsApp?: Maybe<Scalars['Boolean']>;
-  appointmentWotificationMail?: Maybe<Scalars['Boolean']>;
-  appointmentWotificationSms?: Maybe<Scalars['Boolean']>;
-  appointmentReminderWhatsApp?: Maybe<Scalars['Boolean']>;
-  appointmentReminderMail?: Maybe<Scalars['Boolean']>;
-  appointmentReminderSms?: Maybe<Scalars['Boolean']>;
-  NumberSmsAllowed?: Maybe<Scalars['Int']>;
-  sendingMessagesSpecialDates?: Maybe<Scalars['Boolean']>;
-  sendingMailSpecialDates?: Maybe<Scalars['Boolean']>;
-  sendingWhatsAppSpecialDates?: Maybe<Scalars['Boolean']>;
-  allowPromotionalEmailing?: Maybe<Scalars['Boolean']>;
-  AllowQuotesClients?: Maybe<Scalars['Boolean']>;
-  inventoryAndBilling?: Maybe<Scalars['Boolean']>;
-  hoursAllowedVideoConsultation?: Maybe<Scalars['Int']>;
-  integrationWithPaymentGateway?: Maybe<Scalars['Boolean']>;
-  additionalCostHeadquarters?: Maybe<Scalars['Float']>;
-  additionalCostPerAdministrativeUser?: Maybe<Scalars['Float']>;
-  additionalCostPerMedicalUser?: Maybe<Scalars['Float']>;
-  additionalCostHoursVideoConsultation?: Maybe<Scalars['Float']>;
-  additionalCostSmsPackage?: Maybe<Scalars['Float']>;
-  isActive?: Maybe<Scalars['Boolean']>;
-};
-
-export type CreatePathologiesInput = {
-  code: Scalars['String'];
-  description?: Maybe<Scalars['String']>;
-  isActive?: Maybe<Scalars['Boolean']>;
-};
-
-export type CreatePatientDataSettingsInput = {
-  firstName?: Maybe<Scalars['Boolean']>;
-  lastName?: Maybe<Scalars['Boolean']>;
-  firstSurname?: Maybe<Scalars['Boolean']>;
-  lastSurname?: Maybe<Scalars['Boolean']>;
-  dateOfBirth?: Maybe<Scalars['Boolean']>;
-  gender?: Maybe<Scalars['Boolean']>;
-  maritalStatus?: Maybe<Scalars['Boolean']>;
-  bloodType?: Maybe<Scalars['Boolean']>;
-  vitalStatus?: Maybe<Scalars['Boolean']>;
-  contactInformation?: Maybe<Scalars['Boolean']>;
-  landlinePhoneNumber?: Maybe<Scalars['Boolean']>;
-  phoneNumber?: Maybe<Scalars['Boolean']>;
-  patientHeadquarters?: Maybe<Scalars['Boolean']>;
-  mainAddress?: Maybe<Scalars['Boolean']>;
-  secondaryHeadquarters?: Maybe<Scalars['Boolean']>;
-  countryDepartmentCity?: Maybe<Scalars['Boolean']>;
-  email?: Maybe<Scalars['Boolean']>;
-  socialSecurity?: Maybe<Scalars['Boolean']>;
-  affiliateType?: Maybe<Scalars['Boolean']>;
-  affiliateTypeSsg?: Maybe<Scalars['Boolean']>;
-  educationLevel?: Maybe<Scalars['Boolean']>;
-  ethnicGroup?: Maybe<Scalars['Boolean']>;
-  populationGroup?: Maybe<Scalars['Boolean']>;
-  occupation?: Maybe<Scalars['Boolean']>;
-  eps?: Maybe<Scalars['Boolean']>;
-  affiliateDate?: Maybe<Scalars['Boolean']>;
-  prepaid?: Maybe<Scalars['Boolean']>;
-  benefitPlan?: Maybe<Scalars['Boolean']>;
-  healthCareProgram?: Maybe<Scalars['Boolean']>;
-  generalNotesAttention?: Maybe<Scalars['Boolean']>;
-  contractNumber?: Maybe<Scalars['Boolean']>;
-  occupationalRiskManagement?: Maybe<Scalars['Boolean']>;
-  pensionFundManagement?: Maybe<Scalars['Boolean']>;
-  companion?: Maybe<Scalars['Boolean']>;
-  companionName?: Maybe<Scalars['Boolean']>;
-  kinshipCompanion?: Maybe<Scalars['Boolean']>;
-  companionPhone?: Maybe<Scalars['Boolean']>;
-};
-
-export type CreatePatientSafetyCheckInput = {
+export type CreatePharmacologicalManagementInput = {
+  quickMedicalHistory?: Maybe<Scalars['ID']>;
+  patient?: Maybe<Scalars['ID']>;
+  item: Scalars['Int'];
   description: Scalars['String'];
-  isActive?: Maybe<Scalars['Boolean']>;
 };
 
-export type CreateProceduresInput = {
-  code: Scalars['String'];
+export type CreateQuickComprehensiveManagementInput = {
+  quickMedicalHistory?: Maybe<Scalars['ID']>;
+  patient?: Maybe<Scalars['ID']>;
+  physicalTherapy: Scalars['String'];
+  occupationalTherapy: Scalars['String'];
+  nutrition: Scalars['String'];
+  psychology: Scalars['String'];
+  languageTherapy: Scalars['String'];
+  respiratoryTherapy: Scalars['String'];
+  socialWork: Scalars['String'];
+  nursingAssistant: Scalars['String'];
+};
+
+export type CreateQuickMedicalHistoryInput = {
+  patient?: Maybe<Scalars['ID']>;
+  quickMedicalHistoryType?: Maybe<QuickMedicalHistoryType>;
+  companionsName?: Maybe<Scalars['String']>;
+  companionsPhoneNumber?: Maybe<Scalars['String']>;
+  companionsType?: Maybe<Scalars['String']>;
+  responsableName?: Maybe<Scalars['String']>;
+  responsablePhoneNumber?: Maybe<Scalars['String']>;
+  responsableOfficeNumber?: Maybe<Scalars['String']>;
+  reasonForConsultation?: Maybe<Scalars['String']>;
+  relationship?: Maybe<Scalars['String']>;
+  currentIllness?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
-  isActive?: Maybe<Scalars['Boolean']>;
+};
+
+export type CreateQuickParaclinicsEvaluationsInput = {
+  quickMedicalHistory?: Maybe<Scalars['ID']>;
+  patient?: Maybe<Scalars['ID']>;
+  paraclinics?: Maybe<Scalars['String']>;
+  evaluations?: Maybe<Scalars['String']>;
+};
+
+export type CreateQuickPhysicalExamInput = {
+  quickMedicalHistory?: Maybe<Scalars['ID']>;
+  patient?: Maybe<Scalars['ID']>;
+  bloodPressure?: Maybe<Scalars['String']>;
+  heartRate?: Maybe<Scalars['String']>;
+  breathingFrequency?: Maybe<Scalars['String']>;
+  oxygenSaturation?: Maybe<Scalars['String']>;
+  temperature?: Maybe<Scalars['String']>;
+  glucometry?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  clinicalAnalysis?: Maybe<Scalars['String']>;
+  diagnosticImpression?: Maybe<Scalars['String']>;
 };
 
 export type CreateRoleInput = {
   name: Scalars['String'];
   description?: Maybe<Scalars['String']>;
   permits: Array<PermitsInput>;
-};
-
-export type CreateSettingInput = {
-  email?: Maybe<Scalars['String']>;
-  address?: Maybe<Scalars['String']>;
-  phoneNumber?: Maybe<Scalars['String']>;
-  isActive?: Maybe<Scalars['Boolean']>;
-  logo?: Maybe<Scalars['ID']>;
 };
 
 export type CreateTenantInput = {
@@ -327,26 +266,6 @@ export type CreateUserPositionInput = {
   isActive?: Maybe<Scalars['Boolean']>;
 };
 
-export type DataParameterizationFilterFilter = {
-  and?: Maybe<Array<DataParameterizationFilterFilter>>;
-  or?: Maybe<Array<DataParameterizationFilterFilter>>;
-  id?: Maybe<StringFieldComparison>;
-  paymentDeadlines?: Maybe<StringFieldComparison>;
-  deadlineForPaymentReminder?: Maybe<StringFieldComparison>;
-  deadlineForAppointmentReminder?: Maybe<StringFieldComparison>;
-  createdAt?: Maybe<DateFieldComparison>;
-  updatedAt?: Maybe<DateFieldComparison>;
-};
-
-export type DataParameterizationResponse = {
-  id: Scalars['ID'];
-  paymentDeadlines: Scalars['Float'];
-  deadlineForPaymentReminder: Scalars['Float'];
-  deadlineForAppointmentReminder: Scalars['Float'];
-  createdAt?: Maybe<Scalars['DateTime']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-};
-
 export type DateFieldComparison = {
   is?: Maybe<Scalars['Boolean']>;
   isNot?: Maybe<Scalars['Boolean']>;
@@ -368,23 +287,7 @@ export type DateFieldComparisonBetween = {
 };
 
 
-export type DeleteDataParameterizationInput = {
-  entityId: Scalars['ID'];
-};
-
-export type DeleteDiagnosisInput = {
-  entityId: Scalars['ID'];
-};
-
-export type DeleteDiagnosisTypeInput = {
-  entityId: Scalars['ID'];
-};
-
 export type DeleteFilesInput = {
-  entityId: Scalars['ID'];
-};
-
-export type DeleteHabeasDataInput = {
   entityId: Scalars['ID'];
 };
 
@@ -392,92 +295,52 @@ export type DeleteHeadquartersInput = {
   entityId: Scalars['ID'];
 };
 
-export type DeleteIndicationsPatientInput = {
-  entityId: Scalars['ID'];
-};
-
-export type DeleteInformedConsentInput = {
-  entityId: Scalars['ID'];
-};
-
-export type DeleteLaboratoryExamsInput = {
-  entityId: Scalars['ID'];
-};
-
-export type DeleteManyDataParameterizationInput = {
-  where?: Maybe<DataParameterizationFilterFilter>;
-};
-
-export type DeleteManyDiagnosisInput = {
-  where?: Maybe<DiagnosisFilterFilter>;
-};
-
-export type DeleteManyDiagnosisTypeInput = {
-  where?: Maybe<DiagnosisTypeFilterFilter>;
-};
-
 export type DeleteManyFilesInput = {
   where?: Maybe<FilesFilterFilter>;
-};
-
-export type DeleteManyHabeasDataInput = {
-  where?: Maybe<HabeasDataFilterFilter>;
 };
 
 export type DeleteManyHeadquartersInput = {
   where?: Maybe<HeadquartersFilterFilter>;
 };
 
-export type DeleteManyIndicationsPatientInput = {
-  where?: Maybe<IndicationsPatientFilterFilter>;
-};
-
-export type DeleteManyInformedConsentInput = {
-  where?: Maybe<InformedConsentFilterFilter>;
-};
-
-export type DeleteManyLaboratoryExamsInput = {
-  where?: Maybe<LaboratoryExamsFilterFilter>;
+export type DeleteManyMedicalRecordsInput = {
+  where?: Maybe<MedicalRecordsFilterFilter>;
 };
 
 export type DeleteManyMedicalSpecialtiesInput = {
   where?: Maybe<MedicalSpecialtiesFilterFilter>;
 };
 
-export type DeleteManyMedicinesInput = {
-  where?: Maybe<MedicinesFilterFilter>;
-};
-
-export type DeleteManyMembershipInput = {
-  where?: Maybe<MembershipFilterFilter>;
-};
-
 export type DeleteManyNotificationInput = {
   where?: Maybe<NotificationFilterFilter>;
 };
 
-export type DeleteManyPathologiesInput = {
-  where?: Maybe<PathologiesFilterFilter>;
+export type DeleteManyPatientInput = {
+  where?: Maybe<PatientFilterFilter>;
 };
 
-export type DeleteManyPatientDataSettingsInput = {
-  where?: Maybe<PatientDataSettingsFilterFilter>;
+export type DeleteManyPharmacologicalManagementInput = {
+  where?: Maybe<PharmacologicalManagementFilterFilter>;
 };
 
-export type DeleteManyPatientSafetyCheckInput = {
-  where?: Maybe<PatientSafetyCheckFilterFilter>;
+export type DeleteManyQuickComprehensiveManagementInput = {
+  where?: Maybe<QuickComprehensiveManagementFilterFilter>;
 };
 
-export type DeleteManyProceduresInput = {
-  where?: Maybe<ProceduresFilterFilter>;
+export type DeleteManyQuickMedicalHistoryInput = {
+  where?: Maybe<QuickMedicalHistoryFilterFilter>;
+};
+
+export type DeleteManyQuickParaclinicsEvaluationsInput = {
+  where?: Maybe<QuickParaclinicsEvaluationsFilterFilter>;
+};
+
+export type DeleteManyQuickPhysicalExamInput = {
+  where?: Maybe<QuickPhysicalExamFilterFilter>;
 };
 
 export type DeleteManyRoleInput = {
   where?: Maybe<RoleFilterFilter>;
-};
-
-export type DeleteManySettingInput = {
-  where?: Maybe<SettingFilterFilter>;
 };
 
 export type DeleteManyUserAreaInput = {
@@ -492,15 +355,11 @@ export type DeleteManyUserPositionInput = {
   where?: Maybe<UserPositionFilterFilter>;
 };
 
+export type DeleteMedicalRecordsInput = {
+  entityId: Scalars['ID'];
+};
+
 export type DeleteMedicalSpecialtiesInput = {
-  entityId: Scalars['ID'];
-};
-
-export type DeleteMedicinesInput = {
-  entityId: Scalars['ID'];
-};
-
-export type DeleteMembershipInput = {
   entityId: Scalars['ID'];
 };
 
@@ -508,27 +367,31 @@ export type DeleteNotificationInput = {
   entityId: Scalars['ID'];
 };
 
-export type DeletePathologiesInput = {
+export type DeletePatientInput = {
   entityId: Scalars['ID'];
 };
 
-export type DeletePatientDataSettingsInput = {
+export type DeletePharmacologicalManagementInput = {
   entityId: Scalars['ID'];
 };
 
-export type DeletePatientSafetyCheckInput = {
+export type DeleteQuickComprehensiveManagementInput = {
   entityId: Scalars['ID'];
 };
 
-export type DeleteProceduresInput = {
+export type DeleteQuickMedicalHistoryInput = {
+  entityId: Scalars['ID'];
+};
+
+export type DeleteQuickParaclinicsEvaluationsInput = {
+  entityId: Scalars['ID'];
+};
+
+export type DeleteQuickPhysicalExamInput = {
   entityId: Scalars['ID'];
 };
 
 export type DeleteRoleInput = {
-  entityId: Scalars['ID'];
-};
-
-export type DeleteSettingInput = {
   entityId: Scalars['ID'];
 };
 
@@ -548,43 +411,11 @@ export type DeleteUserPositionInput = {
   entityId: Scalars['ID'];
 };
 
-export type DiagnosisFilterFilter = {
-  and?: Maybe<Array<DiagnosisFilterFilter>>;
-  or?: Maybe<Array<DiagnosisFilterFilter>>;
-  id?: Maybe<StringFieldComparison>;
-  code?: Maybe<StringFieldComparison>;
-  description?: Maybe<StringFieldComparison>;
-  createdAt?: Maybe<DateFieldComparison>;
-  updatedAt?: Maybe<DateFieldComparison>;
-};
-
-export type DiagnosisResponse = {
-  id: Scalars['ID'];
-  code: Scalars['String'];
-  description?: Maybe<Scalars['String']>;
-  isActive: Scalars['Boolean'];
-  createdAt?: Maybe<Scalars['DateTime']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-};
-
-export type DiagnosisTypeFilterFilter = {
-  and?: Maybe<Array<DiagnosisTypeFilterFilter>>;
-  or?: Maybe<Array<DiagnosisTypeFilterFilter>>;
-  id?: Maybe<StringFieldComparison>;
-  name?: Maybe<StringFieldComparison>;
-  description?: Maybe<StringFieldComparison>;
-  createdAt?: Maybe<DateFieldComparison>;
-  updatedAt?: Maybe<DateFieldComparison>;
-};
-
-export type DiagnosisTypeResponse = {
-  id: Scalars['ID'];
-  name: Scalars['String'];
-  description?: Maybe<Scalars['String']>;
-  isActive: Scalars['Boolean'];
-  createdAt?: Maybe<Scalars['DateTime']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-};
+export enum DocumentType {
+  IdentificationCard = 'IDENTIFICATION_CARD',
+  ForeignerId = 'FOREIGNER_ID',
+  Passport = 'PASSPORT'
+}
 
 export type EntityFieldsResponse = {
   field: Scalars['String'];
@@ -652,44 +483,14 @@ export type GenderFilterComparison = {
   notIn?: Maybe<Array<UserGender>>;
 };
 
-export type GetAllDataParameterizationInput = {
-  where?: Maybe<DataParameterizationFilterFilter>;
-  orderBy?: Maybe<OrderByDataParameterizationInput>;
-};
-
-export type GetAllDiagnosisInput = {
-  where?: Maybe<DiagnosisFilterFilter>;
-  orderBy?: Maybe<OrderByDiagnosisInput>;
-};
-
-export type GetAllDiagnosisTypeInput = {
-  where?: Maybe<DiagnosisTypeFilterFilter>;
-  orderBy?: Maybe<OrderByDiagnosisTypeInput>;
-};
-
-export type GetAllHabeasDataInput = {
-  where?: Maybe<HabeasDataFilterFilter>;
-  orderBy?: Maybe<OrderByHabeasDataInput>;
-};
-
 export type GetAllHeadquartersInput = {
   where?: Maybe<HeadquartersFilterFilter>;
   orderBy?: Maybe<OrderByHeadquartersInput>;
 };
 
-export type GetAllIndicationsPatientInput = {
-  where?: Maybe<IndicationsPatientFilterFilter>;
-  orderBy?: Maybe<OrderByIndicationsPatientInput>;
-};
-
-export type GetAllInformedConsentInput = {
-  where?: Maybe<InformedConsentFilterFilter>;
-  orderBy?: Maybe<OrderByInformedConsentInput>;
-};
-
-export type GetAllLaboratoryExamsInput = {
-  where?: Maybe<LaboratoryExamsFilterFilter>;
-  orderBy?: Maybe<OrderByLaboratoryExamsInput>;
+export type GetAllMedicalRecordsInput = {
+  where?: Maybe<MedicalRecordsFilterFilter>;
+  orderBy?: Maybe<OrderByMedicalRecordsInput>;
 };
 
 export type GetAllMedicalSpecialtiesInput = {
@@ -697,49 +498,44 @@ export type GetAllMedicalSpecialtiesInput = {
   orderBy?: Maybe<OrderByMedicalSpecialtiesInput>;
 };
 
-export type GetAllMedicinesInput = {
-  where?: Maybe<MedicinesFilterFilter>;
-  orderBy?: Maybe<OrderByMedicinesInput>;
-};
-
-export type GetAllMembershipInput = {
-  where?: Maybe<MembershipFilterFilter>;
-  orderBy?: Maybe<OrderByMembershipInput>;
-};
-
 export type GetAllNotificationInput = {
   where?: Maybe<NotificationFilterFilter>;
   orderBy?: Maybe<OrderByNotificationInput>;
 };
 
-export type GetAllPathologiesInput = {
-  where?: Maybe<PathologiesFilterFilter>;
-  orderBy?: Maybe<OrderByPathologiesInput>;
+export type GetAllPatientInput = {
+  where?: Maybe<PatientFilterFilter>;
+  orderBy?: Maybe<OrderByPatientInput>;
 };
 
-export type GetAllPatientDataSettingsInput = {
-  where?: Maybe<PatientDataSettingsFilterFilter>;
-  orderBy?: Maybe<OrderByPatientDataSettingsInput>;
+export type GetAllPharmacologicalManagementInput = {
+  where?: Maybe<PharmacologicalManagementFilterFilter>;
+  orderBy?: Maybe<OrderByPharmacologicalManagementInput>;
 };
 
-export type GetAllPatientSafetyCheckInput = {
-  where?: Maybe<PatientSafetyCheckFilterFilter>;
-  orderBy?: Maybe<OrderByPatientSafetyCheckInput>;
+export type GetAllQuickComprehensiveManagementInput = {
+  where?: Maybe<QuickComprehensiveManagementFilterFilter>;
+  orderBy?: Maybe<OrderByQuickComprehensiveManagementInput>;
 };
 
-export type GetAllProceduresInput = {
-  where?: Maybe<ProceduresFilterFilter>;
-  orderBy?: Maybe<OrderByProceduresInput>;
+export type GetAllQuickMedicalHistoryInput = {
+  where?: Maybe<QuickMedicalHistoryFilterFilter>;
+  orderBy?: Maybe<OrderByQuickMedicalHistoryInput>;
+};
+
+export type GetAllQuickParaclinicsEvaluationsInput = {
+  where?: Maybe<QuickParaclinicsEvaluationsFilterFilter>;
+  orderBy?: Maybe<OrderByQuickParaclinicsEvaluationsInput>;
+};
+
+export type GetAllQuickPhysicalExamInput = {
+  where?: Maybe<QuickPhysicalExamFilterFilter>;
+  orderBy?: Maybe<OrderByQuickPhysicalExamInput>;
 };
 
 export type GetAllRoleInput = {
   where?: Maybe<RoleFilterFilter>;
   orderBy?: Maybe<OrderByRoleInput>;
-};
-
-export type GetAllSettingInput = {
-  where?: Maybe<SettingFilterFilter>;
-  orderBy?: Maybe<OrderBySettingInput>;
 };
 
 export type GetAllTenantsInput = {
@@ -762,80 +558,52 @@ export type GetAllUsersInput = {
   orderBy?: Maybe<OrderByUserInput>;
 };
 
-export type GetOneDataParameterizationInput = {
-  where?: Maybe<DataParameterizationFilterFilter>;
-};
-
-export type GetOneDiagnosisInput = {
-  where?: Maybe<DiagnosisFilterFilter>;
-};
-
-export type GetOneDiagnosisTypeInput = {
-  where?: Maybe<DiagnosisTypeFilterFilter>;
-};
-
 export type GetOneFilesInput = {
   where?: Maybe<FilesFilterFilter>;
-};
-
-export type GetOneHabeasDataInput = {
-  where?: Maybe<HabeasDataFilterFilter>;
 };
 
 export type GetOneHeadquartersInput = {
   where?: Maybe<HeadquartersFilterFilter>;
 };
 
-export type GetOneIndicationsPatientInput = {
-  where?: Maybe<IndicationsPatientFilterFilter>;
-};
-
-export type GetOneInformedConsentInput = {
-  where?: Maybe<InformedConsentFilterFilter>;
-};
-
-export type GetOneLaboratoryExamsInput = {
-  where?: Maybe<LaboratoryExamsFilterFilter>;
+export type GetOneMedicalRecordsInput = {
+  where?: Maybe<MedicalRecordsFilterFilter>;
 };
 
 export type GetOneMedicalSpecialtiesInput = {
   where?: Maybe<MedicalSpecialtiesFilterFilter>;
 };
 
-export type GetOneMedicinesInput = {
-  where?: Maybe<MedicinesFilterFilter>;
-};
-
-export type GetOneMembershipInput = {
-  where?: Maybe<MembershipFilterFilter>;
-};
-
 export type GetOneNotificationInput = {
   where?: Maybe<NotificationFilterFilter>;
 };
 
-export type GetOnePathologiesInput = {
-  where?: Maybe<PathologiesFilterFilter>;
+export type GetOnePatientInput = {
+  where?: Maybe<PatientFilterFilter>;
 };
 
-export type GetOnePatientDataSettingsInput = {
-  where?: Maybe<PatientDataSettingsFilterFilter>;
+export type GetOnePharmacologicalManagementInput = {
+  where?: Maybe<PharmacologicalManagementFilterFilter>;
 };
 
-export type GetOnePatientSafetyCheckInput = {
-  where?: Maybe<PatientSafetyCheckFilterFilter>;
+export type GetOneQuickComprehensiveManagementInput = {
+  where?: Maybe<QuickComprehensiveManagementFilterFilter>;
 };
 
-export type GetOneProceduresInput = {
-  where?: Maybe<ProceduresFilterFilter>;
+export type GetOneQuickMedicalHistoryInput = {
+  where?: Maybe<QuickMedicalHistoryFilterFilter>;
+};
+
+export type GetOneQuickParaclinicsEvaluationsInput = {
+  where?: Maybe<QuickParaclinicsEvaluationsFilterFilter>;
+};
+
+export type GetOneQuickPhysicalExamInput = {
+  where?: Maybe<QuickPhysicalExamFilterFilter>;
 };
 
 export type GetOneRoleInput = {
   where?: Maybe<RoleFilterFilter>;
-};
-
-export type GetOneSettingInput = {
-  where?: Maybe<SettingFilterFilter>;
 };
 
 export type GetOneTenantInput = {
@@ -855,34 +623,10 @@ export type GetOneUserPositionInput = {
   where?: Maybe<UserPositionFilterFilter>;
 };
 
-export type GetPaginatedDataParameterizationInput = {
-  paginator: PaginatorParams;
-  where?: Maybe<DataParameterizationFilterFilter>;
-  orderBy?: Maybe<OrderByDataParameterizationInput>;
-};
-
-export type GetPaginatedDiagnosisInput = {
-  paginator: PaginatorParams;
-  where?: Maybe<DiagnosisFilterFilter>;
-  orderBy?: Maybe<OrderByDiagnosisInput>;
-};
-
-export type GetPaginatedDiagnosisTypeInput = {
-  paginator: PaginatorParams;
-  where?: Maybe<DiagnosisTypeFilterFilter>;
-  orderBy?: Maybe<OrderByDiagnosisTypeInput>;
-};
-
 export type GetPaginatedFilesInput = {
   paginator: PaginatorParams;
   where?: Maybe<FilesFilterFilter>;
   orderBy?: Maybe<OrderByFilesInput>;
-};
-
-export type GetPaginatedHabeasDataInput = {
-  paginator: PaginatorParams;
-  where?: Maybe<HabeasDataFilterFilter>;
-  orderBy?: Maybe<OrderByHabeasDataInput>;
 };
 
 export type GetPaginatedHeadquartersInput = {
@@ -891,22 +635,10 @@ export type GetPaginatedHeadquartersInput = {
   orderBy?: Maybe<OrderByHeadquartersInput>;
 };
 
-export type GetPaginatedIndicationsPatientInput = {
+export type GetPaginatedMedicalRecordsInput = {
   paginator: PaginatorParams;
-  where?: Maybe<IndicationsPatientFilterFilter>;
-  orderBy?: Maybe<OrderByIndicationsPatientInput>;
-};
-
-export type GetPaginatedInformedConsentInput = {
-  paginator: PaginatorParams;
-  where?: Maybe<InformedConsentFilterFilter>;
-  orderBy?: Maybe<OrderByInformedConsentInput>;
-};
-
-export type GetPaginatedLaboratoryExamsInput = {
-  paginator: PaginatorParams;
-  where?: Maybe<LaboratoryExamsFilterFilter>;
-  orderBy?: Maybe<OrderByLaboratoryExamsInput>;
+  where?: Maybe<MedicalRecordsFilterFilter>;
+  orderBy?: Maybe<OrderByMedicalRecordsInput>;
 };
 
 export type GetPaginatedMedicalSpecialtiesInput = {
@@ -915,58 +647,52 @@ export type GetPaginatedMedicalSpecialtiesInput = {
   orderBy?: Maybe<OrderByMedicalSpecialtiesInput>;
 };
 
-export type GetPaginatedMedicinesInput = {
-  paginator: PaginatorParams;
-  where?: Maybe<MedicinesFilterFilter>;
-  orderBy?: Maybe<OrderByMedicinesInput>;
-};
-
-export type GetPaginatedMembershipInput = {
-  paginator: PaginatorParams;
-  where?: Maybe<MembershipFilterFilter>;
-  orderBy?: Maybe<OrderByMembershipInput>;
-};
-
 export type GetPaginatedNotificationInput = {
   paginator: PaginatorParams;
   where?: Maybe<NotificationFilterFilter>;
   orderBy?: Maybe<OrderByNotificationInput>;
 };
 
-export type GetPaginatedPathologiesInput = {
+export type GetPaginatedPatientInput = {
   paginator: PaginatorParams;
-  where?: Maybe<PathologiesFilterFilter>;
-  orderBy?: Maybe<OrderByPathologiesInput>;
+  where?: Maybe<PatientFilterFilter>;
+  orderBy?: Maybe<OrderByPatientInput>;
 };
 
-export type GetPaginatedPatientDataSettingsInput = {
+export type GetPaginatedPharmacologicalManagementInput = {
   paginator: PaginatorParams;
-  where?: Maybe<PatientDataSettingsFilterFilter>;
-  orderBy?: Maybe<OrderByPatientDataSettingsInput>;
+  where?: Maybe<PharmacologicalManagementFilterFilter>;
+  orderBy?: Maybe<OrderByPharmacologicalManagementInput>;
 };
 
-export type GetPaginatedPatientSafetyCheckInput = {
+export type GetPaginatedQuickComprehensiveManagementInput = {
   paginator: PaginatorParams;
-  where?: Maybe<PatientSafetyCheckFilterFilter>;
-  orderBy?: Maybe<OrderByPatientSafetyCheckInput>;
+  where?: Maybe<QuickComprehensiveManagementFilterFilter>;
+  orderBy?: Maybe<OrderByQuickComprehensiveManagementInput>;
 };
 
-export type GetPaginatedProceduresInput = {
+export type GetPaginatedQuickMedicalHistoryInput = {
   paginator: PaginatorParams;
-  where?: Maybe<ProceduresFilterFilter>;
-  orderBy?: Maybe<OrderByProceduresInput>;
+  where?: Maybe<QuickMedicalHistoryFilterFilter>;
+  orderBy?: Maybe<OrderByQuickMedicalHistoryInput>;
+};
+
+export type GetPaginatedQuickParaclinicsEvaluationsInput = {
+  paginator: PaginatorParams;
+  where?: Maybe<QuickParaclinicsEvaluationsFilterFilter>;
+  orderBy?: Maybe<OrderByQuickParaclinicsEvaluationsInput>;
+};
+
+export type GetPaginatedQuickPhysicalExamInput = {
+  paginator: PaginatorParams;
+  where?: Maybe<QuickPhysicalExamFilterFilter>;
+  orderBy?: Maybe<OrderByQuickPhysicalExamInput>;
 };
 
 export type GetPaginatedRoleInput = {
   paginator: PaginatorParams;
   where?: Maybe<RoleFilterFilter>;
   orderBy?: Maybe<OrderByRoleInput>;
-};
-
-export type GetPaginatedSettingInput = {
-  paginator: PaginatorParams;
-  where?: Maybe<SettingFilterFilter>;
-  orderBy?: Maybe<OrderBySettingInput>;
 };
 
 export type GetPaginatedTenantInput = {
@@ -1013,23 +739,6 @@ export type GraphQlFilterFilterComparison = {
   notILike?: Maybe<ProfileFilterFilter>;
   in?: Maybe<Array<ProfileFilterFilter>>;
   notIn?: Maybe<Array<ProfileFilterFilter>>;
-};
-
-export type HabeasDataFilterFilter = {
-  and?: Maybe<Array<HabeasDataFilterFilter>>;
-  or?: Maybe<Array<HabeasDataFilterFilter>>;
-  id?: Maybe<StringFieldComparison>;
-  description?: Maybe<StringFieldComparison>;
-  createdAt?: Maybe<DateFieldComparison>;
-  updatedAt?: Maybe<DateFieldComparison>;
-};
-
-export type HabeasDataResponse = {
-  id: Scalars['ID'];
-  description: Scalars['String'];
-  isActive: Scalars['Boolean'];
-  createdAt?: Maybe<Scalars['DateTime']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
 export type HeadquartersFilterFilter = {
@@ -1087,41 +796,12 @@ export type IdFilterComparison = {
   notIn?: Maybe<Array<Scalars['ID']>>;
 };
 
-export type IndicationsPatientFilterFilter = {
-  and?: Maybe<Array<IndicationsPatientFilterFilter>>;
-  or?: Maybe<Array<IndicationsPatientFilterFilter>>;
-  id?: Maybe<StringFieldComparison>;
-  description?: Maybe<StringFieldComparison>;
-  createdAt?: Maybe<DateFieldComparison>;
-  updatedAt?: Maybe<DateFieldComparison>;
-};
-
-export type IndicationsPatientResponse = {
-  id: Scalars['ID'];
-  description: Scalars['String'];
-  isActive: Scalars['Boolean'];
-  createdAt?: Maybe<Scalars['DateTime']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-};
-
-export type InformedConsentFilterFilter = {
-  and?: Maybe<Array<InformedConsentFilterFilter>>;
-  or?: Maybe<Array<InformedConsentFilterFilter>>;
-  id?: Maybe<StringFieldComparison>;
-  name?: Maybe<StringFieldComparison>;
-  description?: Maybe<StringFieldComparison>;
-  createdAt?: Maybe<DateFieldComparison>;
-  updatedAt?: Maybe<DateFieldComparison>;
-};
-
-export type InformedConsentResponse = {
-  id: Scalars['ID'];
-  name: Scalars['String'];
-  description?: Maybe<Scalars['String']>;
-  isActive: Scalars['Boolean'];
-  createdAt?: Maybe<Scalars['DateTime']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-};
+export enum InsuranceType {
+  Ars = 'ARS',
+  Eps = 'EPS',
+  Ips = 'IPS',
+  Arl = 'ARL'
+}
 
 export type JwtAuthenticatedResponse = {
   user: AuthUserResponse;
@@ -1130,21 +810,48 @@ export type JwtAuthenticatedResponse = {
   access_token: Scalars['String'];
 };
 
-export type LaboratoryExamsFilterFilter = {
-  and?: Maybe<Array<LaboratoryExamsFilterFilter>>;
-  or?: Maybe<Array<LaboratoryExamsFilterFilter>>;
+export enum LinkedType {
+  Subsidized = 'SUBSIDIZED',
+  Linked = 'LINKED',
+  Contributory = 'CONTRIBUTORY'
+}
+
+export enum MaritalStatus {
+  Single = 'SINGLE',
+  Married = 'MARRIED',
+  FreeUnion = 'FREE_UNION',
+  Widower = 'WIDOWER'
+}
+
+export enum MedicalRecordType {
+  Pathological = 'PATHOLOGICAL',
+  Surgical = 'SURGICAL',
+  Pharmacological = 'PHARMACOLOGICAL',
+  AllergicToxic = 'ALLERGIC_TOXIC',
+  Traumatic = 'TRAUMATIC',
+  Family = 'FAMILY',
+  Transfusionals = 'TRANSFUSIONALS',
+  Gynecological = 'GYNECOLOGICAL',
+  Expositional = 'EXPOSITIONAL',
+  Others = 'OTHERS'
+}
+
+export type MedicalRecordsFilterFilter = {
+  and?: Maybe<Array<MedicalRecordsFilterFilter>>;
+  or?: Maybe<Array<MedicalRecordsFilterFilter>>;
   id?: Maybe<StringFieldComparison>;
-  code?: Maybe<StringFieldComparison>;
+  name?: Maybe<StringFieldComparison>;
   description?: Maybe<StringFieldComparison>;
   createdAt?: Maybe<DateFieldComparison>;
   updatedAt?: Maybe<DateFieldComparison>;
 };
 
-export type LaboratoryExamsResponse = {
+export type MedicalRecordsResponse = {
   id: Scalars['ID'];
-  code: Scalars['String'];
+  quickMedicalHistory?: Maybe<SolvedEntityResponse>;
+  patient?: Maybe<SolvedEntityResponse>;
+  medicalRecordType?: Maybe<MedicalRecordType>;
   description?: Maybe<Scalars['String']>;
-  isActive: Scalars['Boolean'];
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
 };
@@ -1163,88 +870,6 @@ export type MedicalSpecialtiesResponse = {
   id: Scalars['ID'];
   name: Scalars['String'];
   description?: Maybe<Scalars['String']>;
-  isActive: Scalars['Boolean'];
-  createdAt?: Maybe<Scalars['DateTime']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-};
-
-export type MedicinesFilterFilter = {
-  and?: Maybe<Array<MedicinesFilterFilter>>;
-  or?: Maybe<Array<MedicinesFilterFilter>>;
-  id?: Maybe<StringFieldComparison>;
-  code?: Maybe<StringFieldComparison>;
-  description?: Maybe<StringFieldComparison>;
-  createdAt?: Maybe<DateFieldComparison>;
-  updatedAt?: Maybe<DateFieldComparison>;
-};
-
-export type MedicinesResponse = {
-  id: Scalars['ID'];
-  code: Scalars['String'];
-  description?: Maybe<Scalars['String']>;
-  isActive: Scalars['Boolean'];
-  createdAt?: Maybe<Scalars['DateTime']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-};
-
-export type MembershipFilterFilter = {
-  and?: Maybe<Array<MembershipFilterFilter>>;
-  or?: Maybe<Array<MembershipFilterFilter>>;
-  id?: Maybe<StringFieldComparison>;
-  validity?: Maybe<StringFieldComparison>;
-  daysAfterExpired?: Maybe<StringFieldComparison>;
-  limitPatients?: Maybe<StringFieldComparison>;
-  limitHeadquarters?: Maybe<StringFieldComparison>;
-  administrativeUserQuantity?: Maybe<StringFieldComparison>;
-  medicalUserQuantity?: Maybe<StringFieldComparison>;
-  NumberSmsAllowed?: Maybe<StringFieldComparison>;
-  hoursAllowedVideoConsultation?: Maybe<StringFieldComparison>;
-  additionalCostHeadquarters?: Maybe<StringFieldComparison>;
-  additionalCostPerAdministrativeUser?: Maybe<StringFieldComparison>;
-  additionalCostPerMedicalUser?: Maybe<StringFieldComparison>;
-  additionalCostHoursVideoConsultation?: Maybe<StringFieldComparison>;
-  additionalCostSmsPackage?: Maybe<StringFieldComparison>;
-  createdAt?: Maybe<DateFieldComparison>;
-  updatedAt?: Maybe<DateFieldComparison>;
-};
-
-export type MembershipResponse = {
-  id: Scalars['ID'];
-  cost?: Maybe<Scalars['Float']>;
-  validity: TaxType;
-  daysAfterExpired?: Maybe<Scalars['Float']>;
-  voiceTranscription: Scalars['Boolean'];
-  limitedNumberPatients: Scalars['Boolean'];
-  limitPatients?: Maybe<Scalars['Float']>;
-  useLogo: Scalars['Boolean'];
-  limitedNumberHeadquarters: Scalars['Boolean'];
-  limitHeadquarters?: Maybe<Scalars['Float']>;
-  administrativeUserQuantity?: Maybe<Scalars['Float']>;
-  medicalUserQuantity?: Maybe<Scalars['Float']>;
-  sendingEmailMedicalPrescription: Scalars['Boolean'];
-  sendingWhatsappMedicalPrescription: Scalars['Boolean'];
-  generateConsentDigitally: Scalars['Boolean'];
-  schedulingAppointmentsWeb: Scalars['Boolean'];
-  appointmentWotificationWhatsApp: Scalars['Boolean'];
-  appointmentWotificationMail: Scalars['Boolean'];
-  appointmentWotificationSms: Scalars['Boolean'];
-  appointmentReminderWhatsApp: Scalars['Boolean'];
-  appointmentReminderMail: Scalars['Boolean'];
-  appointmentReminderSms: Scalars['Boolean'];
-  NumberSmsAllowed?: Maybe<Scalars['Float']>;
-  sendingMessagesSpecialDates: Scalars['Boolean'];
-  sendingMailSpecialDates: Scalars['Boolean'];
-  sendingWhatsAppSpecialDates: Scalars['Boolean'];
-  allowPromotionalEmailing: Scalars['Boolean'];
-  AllowQuotesClients: Scalars['Boolean'];
-  inventoryAndBilling: Scalars['Boolean'];
-  hoursAllowedVideoConsultation?: Maybe<Scalars['Float']>;
-  integrationWithPaymentGateway: Scalars['Boolean'];
-  additionalCostHeadquarters?: Maybe<Scalars['Float']>;
-  additionalCostPerAdministrativeUser?: Maybe<Scalars['Float']>;
-  additionalCostPerMedicalUser?: Maybe<Scalars['Float']>;
-  additionalCostHoursVideoConsultation?: Maybe<Scalars['Float']>;
-  additionalCostSmsPackage?: Maybe<Scalars['Float']>;
   isActive: Scalars['Boolean'];
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
@@ -1290,66 +915,38 @@ export type Mutation = {
   updateHeadquarters?: Maybe<Scalars['Void']>;
   deleteHeadquarters?: Maybe<Scalars['Void']>;
   deleteManyHeadquarters?: Maybe<Scalars['Void']>;
-  createSetting?: Maybe<Scalars['Void']>;
-  updateSetting?: Maybe<Scalars['Void']>;
-  deleteSetting?: Maybe<Scalars['Void']>;
-  deleteManySetting?: Maybe<Scalars['Void']>;
-  createMembership?: Maybe<Scalars['Void']>;
-  updateMembership?: Maybe<Scalars['Void']>;
-  deleteMembership?: Maybe<Scalars['Void']>;
-  deleteManyMembership?: Maybe<Scalars['Void']>;
-  createDataParameterization?: Maybe<Scalars['Void']>;
-  updateDataParameterization?: Maybe<Scalars['Void']>;
-  deleteDataParameterization?: Maybe<Scalars['Void']>;
-  deleteManyDataParameterization?: Maybe<Scalars['Void']>;
-  createPatientDataSettings?: Maybe<Scalars['Void']>;
-  updatePatientDataSettings?: Maybe<Scalars['Void']>;
-  deletePatientDataSettings?: Maybe<Scalars['Void']>;
-  deleteManyPatientDataSettings?: Maybe<Scalars['Void']>;
   createMedicalSpecialties?: Maybe<Scalars['Void']>;
   updateMedicalSpecialties?: Maybe<Scalars['Void']>;
   deleteMedicalSpecialties?: Maybe<Scalars['Void']>;
   deleteManyMedicalSpecialties?: Maybe<Scalars['Void']>;
-  createDiagnosisType?: Maybe<Scalars['Void']>;
-  updateDiagnosisType?: Maybe<Scalars['Void']>;
-  deleteDiagnosisType?: Maybe<Scalars['Void']>;
-  deleteManyDiagnosisType?: Maybe<Scalars['Void']>;
-  createDiagnosis?: Maybe<Scalars['Void']>;
-  updateDiagnosis?: Maybe<Scalars['Void']>;
-  deleteDiagnosis?: Maybe<Scalars['Void']>;
-  deleteManyDiagnosis?: Maybe<Scalars['Void']>;
-  createProcedures?: Maybe<Scalars['Void']>;
-  updateProcedures?: Maybe<Scalars['Void']>;
-  deleteProcedures?: Maybe<Scalars['Void']>;
-  deleteManyProcedures?: Maybe<Scalars['Void']>;
-  createIndicationsPatient?: Maybe<Scalars['Void']>;
-  updateIndicationsPatient?: Maybe<Scalars['Void']>;
-  deleteIndicationsPatient?: Maybe<Scalars['Void']>;
-  deleteManyIndicationsPatient?: Maybe<Scalars['Void']>;
-  createHabeasData?: Maybe<Scalars['Void']>;
-  updateHabeasData?: Maybe<Scalars['Void']>;
-  deleteHabeasData?: Maybe<Scalars['Void']>;
-  deleteManyHabeasData?: Maybe<Scalars['Void']>;
-  createInformedConsent?: Maybe<Scalars['Void']>;
-  updateInformedConsent?: Maybe<Scalars['Void']>;
-  deleteInformedConsent?: Maybe<Scalars['Void']>;
-  deleteManyInformedConsent?: Maybe<Scalars['Void']>;
-  createPatientSafetyCheck?: Maybe<Scalars['Void']>;
-  updatePatientSafetyCheck?: Maybe<Scalars['Void']>;
-  deletePatientSafetyCheck?: Maybe<Scalars['Void']>;
-  deleteManyPatientSafetyCheck?: Maybe<Scalars['Void']>;
-  createLaboratoryExams?: Maybe<Scalars['Void']>;
-  updateLaboratoryExams?: Maybe<Scalars['Void']>;
-  deleteLaboratoryExams?: Maybe<Scalars['Void']>;
-  deleteManyLaboratoryExams?: Maybe<Scalars['Void']>;
-  createMedicines?: Maybe<Scalars['Void']>;
-  updateMedicines?: Maybe<Scalars['Void']>;
-  deleteMedicines?: Maybe<Scalars['Void']>;
-  deleteManyMedicines?: Maybe<Scalars['Void']>;
-  createPathologies?: Maybe<Scalars['Void']>;
-  updatePathologies?: Maybe<Scalars['Void']>;
-  deletePathologies?: Maybe<Scalars['Void']>;
-  deleteManyPathologies?: Maybe<Scalars['Void']>;
+  createPatient?: Maybe<Scalars['Void']>;
+  updatePatient?: Maybe<Scalars['Void']>;
+  deletePatient?: Maybe<Scalars['Void']>;
+  deleteManyPatient?: Maybe<Scalars['Void']>;
+  createQuickMedicalHistory?: Maybe<Scalars['Void']>;
+  updateQuickMedicalHistory?: Maybe<Scalars['Void']>;
+  deleteQuickMedicalHistory?: Maybe<Scalars['Void']>;
+  deleteManyQuickMedicalHistory?: Maybe<Scalars['Void']>;
+  createMedicalRecords?: Maybe<Scalars['Void']>;
+  updateMedicalRecords?: Maybe<Scalars['Void']>;
+  deleteMedicalRecords?: Maybe<Scalars['Void']>;
+  deleteManyMedicalRecords?: Maybe<Scalars['Void']>;
+  createQuickPhysicalExam?: Maybe<Scalars['Void']>;
+  updateQuickPhysicalExam?: Maybe<Scalars['Void']>;
+  deleteQuickPhysicalExam?: Maybe<Scalars['Void']>;
+  deleteManyQuickPhysicalExam?: Maybe<Scalars['Void']>;
+  createPharmacologicalManagement?: Maybe<Scalars['Void']>;
+  updatePharmacologicalManagement?: Maybe<Scalars['Void']>;
+  deletePharmacologicalManagement?: Maybe<Scalars['Void']>;
+  deleteManyPharmacologicalManagement?: Maybe<Scalars['Void']>;
+  createQuickComprehensiveManagement?: Maybe<Scalars['Void']>;
+  updateQuickComprehensiveManagement?: Maybe<Scalars['Void']>;
+  deleteQuickComprehensiveManagement?: Maybe<Scalars['Void']>;
+  deleteManyQuickComprehensiveManagement?: Maybe<Scalars['Void']>;
+  createQuickParaclinicsEvaluations?: Maybe<Scalars['Void']>;
+  updateQuickParaclinicsEvaluations?: Maybe<Scalars['Void']>;
+  deleteQuickParaclinicsEvaluations?: Maybe<Scalars['Void']>;
+  deleteManyQuickParaclinicsEvaluations?: Maybe<Scalars['Void']>;
 };
 
 
@@ -1538,86 +1135,6 @@ export type MutationDeleteManyHeadquartersArgs = {
 };
 
 
-export type MutationCreateSettingArgs = {
-  input: CreateSettingInput;
-};
-
-
-export type MutationUpdateSettingArgs = {
-  input: UpdateSettingInput;
-};
-
-
-export type MutationDeleteSettingArgs = {
-  input: DeleteSettingInput;
-};
-
-
-export type MutationDeleteManySettingArgs = {
-  input: DeleteManySettingInput;
-};
-
-
-export type MutationCreateMembershipArgs = {
-  input: CreateMembershipInput;
-};
-
-
-export type MutationUpdateMembershipArgs = {
-  input: UpdateMembershipInput;
-};
-
-
-export type MutationDeleteMembershipArgs = {
-  input: DeleteMembershipInput;
-};
-
-
-export type MutationDeleteManyMembershipArgs = {
-  input: DeleteManyMembershipInput;
-};
-
-
-export type MutationCreateDataParameterizationArgs = {
-  input: CreateDataParameterizationInput;
-};
-
-
-export type MutationUpdateDataParameterizationArgs = {
-  input: UpdateDataParameterizationInput;
-};
-
-
-export type MutationDeleteDataParameterizationArgs = {
-  input: DeleteDataParameterizationInput;
-};
-
-
-export type MutationDeleteManyDataParameterizationArgs = {
-  input: DeleteManyDataParameterizationInput;
-};
-
-
-export type MutationCreatePatientDataSettingsArgs = {
-  input: CreatePatientDataSettingsInput;
-};
-
-
-export type MutationUpdatePatientDataSettingsArgs = {
-  input: UpdatePatientDataSettingsInput;
-};
-
-
-export type MutationDeletePatientDataSettingsArgs = {
-  input: DeletePatientDataSettingsInput;
-};
-
-
-export type MutationDeleteManyPatientDataSettingsArgs = {
-  input: DeleteManyPatientDataSettingsInput;
-};
-
-
 export type MutationCreateMedicalSpecialtiesArgs = {
   input: CreateMedicalSpecialtiesInput;
 };
@@ -1638,203 +1155,143 @@ export type MutationDeleteManyMedicalSpecialtiesArgs = {
 };
 
 
-export type MutationCreateDiagnosisTypeArgs = {
-  input: CreateDiagnosisTypeInput;
+export type MutationCreatePatientArgs = {
+  input: CreatePatientInput;
 };
 
 
-export type MutationUpdateDiagnosisTypeArgs = {
-  input: UpdateDiagnosisTypeInput;
+export type MutationUpdatePatientArgs = {
+  input: UpdatePatientInput;
 };
 
 
-export type MutationDeleteDiagnosisTypeArgs = {
-  input: DeleteDiagnosisTypeInput;
+export type MutationDeletePatientArgs = {
+  input: DeletePatientInput;
 };
 
 
-export type MutationDeleteManyDiagnosisTypeArgs = {
-  input: DeleteManyDiagnosisTypeInput;
+export type MutationDeleteManyPatientArgs = {
+  input: DeleteManyPatientInput;
 };
 
 
-export type MutationCreateDiagnosisArgs = {
-  input: CreateDiagnosisInput;
+export type MutationCreateQuickMedicalHistoryArgs = {
+  input: CreateQuickMedicalHistoryInput;
 };
 
 
-export type MutationUpdateDiagnosisArgs = {
-  input: UpdateDiagnosisInput;
+export type MutationUpdateQuickMedicalHistoryArgs = {
+  input: UpdateQuickMedicalHistoryInput;
 };
 
 
-export type MutationDeleteDiagnosisArgs = {
-  input: DeleteDiagnosisInput;
+export type MutationDeleteQuickMedicalHistoryArgs = {
+  input: DeleteQuickMedicalHistoryInput;
 };
 
 
-export type MutationDeleteManyDiagnosisArgs = {
-  input: DeleteManyDiagnosisInput;
+export type MutationDeleteManyQuickMedicalHistoryArgs = {
+  input: DeleteManyQuickMedicalHistoryInput;
 };
 
 
-export type MutationCreateProceduresArgs = {
-  input: CreateProceduresInput;
+export type MutationCreateMedicalRecordsArgs = {
+  input: CreateMedicalRecordsInput;
 };
 
 
-export type MutationUpdateProceduresArgs = {
-  input: UpdateProceduresInput;
+export type MutationUpdateMedicalRecordsArgs = {
+  input: UpdateMedicalRecordsInput;
 };
 
 
-export type MutationDeleteProceduresArgs = {
-  input: DeleteProceduresInput;
+export type MutationDeleteMedicalRecordsArgs = {
+  input: DeleteMedicalRecordsInput;
 };
 
 
-export type MutationDeleteManyProceduresArgs = {
-  input: DeleteManyProceduresInput;
+export type MutationDeleteManyMedicalRecordsArgs = {
+  input: DeleteManyMedicalRecordsInput;
 };
 
 
-export type MutationCreateIndicationsPatientArgs = {
-  input: CreateIndicationsPatientInput;
+export type MutationCreateQuickPhysicalExamArgs = {
+  input: CreateQuickPhysicalExamInput;
 };
 
 
-export type MutationUpdateIndicationsPatientArgs = {
-  input: UpdateIndicationsPatientInput;
+export type MutationUpdateQuickPhysicalExamArgs = {
+  input: UpdateQuickPhysicalExamInput;
 };
 
 
-export type MutationDeleteIndicationsPatientArgs = {
-  input: DeleteIndicationsPatientInput;
+export type MutationDeleteQuickPhysicalExamArgs = {
+  input: DeleteQuickPhysicalExamInput;
 };
 
 
-export type MutationDeleteManyIndicationsPatientArgs = {
-  input: DeleteManyIndicationsPatientInput;
+export type MutationDeleteManyQuickPhysicalExamArgs = {
+  input: DeleteManyQuickPhysicalExamInput;
 };
 
 
-export type MutationCreateHabeasDataArgs = {
-  input: CreateHabeasDataInput;
+export type MutationCreatePharmacologicalManagementArgs = {
+  input: CreatePharmacologicalManagementInput;
 };
 
 
-export type MutationUpdateHabeasDataArgs = {
-  input: UpdateHabeasDataInput;
+export type MutationUpdatePharmacologicalManagementArgs = {
+  input: UpdatePharmacologicalManagementInput;
 };
 
 
-export type MutationDeleteHabeasDataArgs = {
-  input: DeleteHabeasDataInput;
+export type MutationDeletePharmacologicalManagementArgs = {
+  input: DeletePharmacologicalManagementInput;
 };
 
 
-export type MutationDeleteManyHabeasDataArgs = {
-  input: DeleteManyHabeasDataInput;
+export type MutationDeleteManyPharmacologicalManagementArgs = {
+  input: DeleteManyPharmacologicalManagementInput;
 };
 
 
-export type MutationCreateInformedConsentArgs = {
-  input: CreateInformedConsentInput;
+export type MutationCreateQuickComprehensiveManagementArgs = {
+  input: CreateQuickComprehensiveManagementInput;
 };
 
 
-export type MutationUpdateInformedConsentArgs = {
-  input: UpdateInformedConsentInput;
+export type MutationUpdateQuickComprehensiveManagementArgs = {
+  input: UpdateQuickComprehensiveManagementInput;
 };
 
 
-export type MutationDeleteInformedConsentArgs = {
-  input: DeleteInformedConsentInput;
+export type MutationDeleteQuickComprehensiveManagementArgs = {
+  input: DeleteQuickComprehensiveManagementInput;
 };
 
 
-export type MutationDeleteManyInformedConsentArgs = {
-  input: DeleteManyInformedConsentInput;
+export type MutationDeleteManyQuickComprehensiveManagementArgs = {
+  input: DeleteManyQuickComprehensiveManagementInput;
 };
 
 
-export type MutationCreatePatientSafetyCheckArgs = {
-  input: CreatePatientSafetyCheckInput;
+export type MutationCreateQuickParaclinicsEvaluationsArgs = {
+  input: CreateQuickParaclinicsEvaluationsInput;
 };
 
 
-export type MutationUpdatePatientSafetyCheckArgs = {
-  input: UpdatePatientSafetyCheckInput;
+export type MutationUpdateQuickParaclinicsEvaluationsArgs = {
+  input: UpdateQuickParaclinicsEvaluationsInput;
 };
 
 
-export type MutationDeletePatientSafetyCheckArgs = {
-  input: DeletePatientSafetyCheckInput;
+export type MutationDeleteQuickParaclinicsEvaluationsArgs = {
+  input: DeleteQuickParaclinicsEvaluationsInput;
 };
 
 
-export type MutationDeleteManyPatientSafetyCheckArgs = {
-  input: DeleteManyPatientSafetyCheckInput;
-};
-
-
-export type MutationCreateLaboratoryExamsArgs = {
-  input: CreateLaboratoryExamsInput;
-};
-
-
-export type MutationUpdateLaboratoryExamsArgs = {
-  input: UpdateLaboratoryExamsInput;
-};
-
-
-export type MutationDeleteLaboratoryExamsArgs = {
-  input: DeleteLaboratoryExamsInput;
-};
-
-
-export type MutationDeleteManyLaboratoryExamsArgs = {
-  input: DeleteManyLaboratoryExamsInput;
-};
-
-
-export type MutationCreateMedicinesArgs = {
-  input: CreateMedicinesInput;
-};
-
-
-export type MutationUpdateMedicinesArgs = {
-  input: UpdateMedicinesInput;
-};
-
-
-export type MutationDeleteMedicinesArgs = {
-  input: DeleteMedicinesInput;
-};
-
-
-export type MutationDeleteManyMedicinesArgs = {
-  input: DeleteManyMedicinesInput;
-};
-
-
-export type MutationCreatePathologiesArgs = {
-  input: CreatePathologiesInput;
-};
-
-
-export type MutationUpdatePathologiesArgs = {
-  input: UpdatePathologiesInput;
-};
-
-
-export type MutationDeletePathologiesArgs = {
-  input: DeletePathologiesInput;
-};
-
-
-export type MutationDeleteManyPathologiesArgs = {
-  input: DeleteManyPathologiesInput;
+export type MutationDeleteManyQuickParaclinicsEvaluationsArgs = {
+  input: DeleteManyQuickParaclinicsEvaluationsInput;
 };
 
 export type NotificationFilterFilter = {
@@ -1902,32 +1359,8 @@ export type NotificationTypeFilterComparison = {
   notIn?: Maybe<Array<NotificationType>>;
 };
 
-export type OrderByDataParameterizationInput = {
-  paymentDeadlines?: Maybe<OrderByType>;
-  deadlineForPaymentReminder?: Maybe<OrderByType>;
-  deadlineForAppointmentReminder?: Maybe<OrderByType>;
-  createdAt?: Maybe<OrderByType>;
-};
-
-export type OrderByDiagnosisInput = {
-  code?: Maybe<OrderByType>;
-  description?: Maybe<OrderByType>;
-  createdAt?: Maybe<OrderByType>;
-};
-
-export type OrderByDiagnosisTypeInput = {
-  name?: Maybe<OrderByType>;
-  description?: Maybe<OrderByType>;
-  createdAt?: Maybe<OrderByType>;
-};
-
 export type OrderByFilesInput = {
   name?: Maybe<OrderByType>;
-  description?: Maybe<OrderByType>;
-  createdAt?: Maybe<OrderByType>;
-};
-
-export type OrderByHabeasDataInput = {
   description?: Maybe<OrderByType>;
   createdAt?: Maybe<OrderByType>;
 };
@@ -1938,19 +1371,8 @@ export type OrderByHeadquartersInput = {
   createdAt?: Maybe<OrderByType>;
 };
 
-export type OrderByIndicationsPatientInput = {
-  description?: Maybe<OrderByType>;
-  createdAt?: Maybe<OrderByType>;
-};
-
-export type OrderByInformedConsentInput = {
+export type OrderByMedicalRecordsInput = {
   name?: Maybe<OrderByType>;
-  description?: Maybe<OrderByType>;
-  createdAt?: Maybe<OrderByType>;
-};
-
-export type OrderByLaboratoryExamsInput = {
-  code?: Maybe<OrderByType>;
   description?: Maybe<OrderByType>;
   createdAt?: Maybe<OrderByType>;
 };
@@ -1961,54 +1383,57 @@ export type OrderByMedicalSpecialtiesInput = {
   createdAt?: Maybe<OrderByType>;
 };
 
-export type OrderByMedicinesInput = {
-  code?: Maybe<OrderByType>;
-  description?: Maybe<OrderByType>;
-  createdAt?: Maybe<OrderByType>;
-};
-
-export type OrderByMembershipInput = {
-  name?: Maybe<OrderByType>;
-  description?: Maybe<OrderByType>;
-  createdAt?: Maybe<OrderByType>;
-};
-
 export type OrderByNotificationInput = {
   type?: Maybe<OrderByType>;
   createdAt?: Maybe<OrderByType>;
 };
 
-export type OrderByPathologiesInput = {
-  code?: Maybe<OrderByType>;
-  description?: Maybe<OrderByType>;
-  createdAt?: Maybe<OrderByType>;
-};
-
-export type OrderByPatientDataSettingsInput = {
-  createdAt?: Maybe<OrderByType>;
-};
-
-export type OrderByPatientSafetyCheckInput = {
-  description?: Maybe<OrderByType>;
-  createdAt?: Maybe<OrderByType>;
-};
-
-export type OrderByProceduresInput = {
+export type OrderByPatientInput = {
   name?: Maybe<OrderByType>;
   description?: Maybe<OrderByType>;
+  createdAt?: Maybe<OrderByType>;
+};
+
+export type OrderByPharmacologicalManagementInput = {
+  name?: Maybe<OrderByType>;
+  description?: Maybe<OrderByType>;
+  createdAt?: Maybe<OrderByType>;
+};
+
+export type OrderByQuickComprehensiveManagementInput = {
+  name?: Maybe<OrderByType>;
+  description?: Maybe<OrderByType>;
+  createdAt?: Maybe<OrderByType>;
+};
+
+export type OrderByQuickMedicalHistoryInput = {
+  name?: Maybe<OrderByType>;
+  description?: Maybe<OrderByType>;
+  createdAt?: Maybe<OrderByType>;
+};
+
+export type OrderByQuickParaclinicsEvaluationsInput = {
+  name?: Maybe<OrderByType>;
+  description?: Maybe<OrderByType>;
+  createdAt?: Maybe<OrderByType>;
+};
+
+export type OrderByQuickPhysicalExamInput = {
+  bloodPressure?: Maybe<OrderByType>;
+  heartRate?: Maybe<OrderByType>;
+  breathingFrequency?: Maybe<OrderByType>;
+  oxygenSaturation?: Maybe<OrderByType>;
+  temperature?: Maybe<OrderByType>;
+  glucometry?: Maybe<OrderByType>;
+  description?: Maybe<OrderByType>;
+  clinicalAnalysis?: Maybe<OrderByType>;
+  diagnosticImpression?: Maybe<OrderByType>;
   createdAt?: Maybe<OrderByType>;
 };
 
 export type OrderByRoleInput = {
   name?: Maybe<OrderByType>;
   description?: Maybe<OrderByType>;
-  createdAt?: Maybe<OrderByType>;
-};
-
-export type OrderBySettingInput = {
-  email?: Maybe<OrderByType>;
-  address?: Maybe<OrderByType>;
-  phoneNumber?: Maybe<OrderByType>;
   createdAt?: Maybe<OrderByType>;
 };
 
@@ -2054,40 +1479,8 @@ export enum Provider {
   Google = 'GOOGLE'
 }
 
-export type PaginatedDataParameterizationResponse = {
-  items: Array<DataParameterizationResponse>;
-  total: Scalars['Int'];
-  totalPages: Scalars['Int'];
-  limit: Scalars['Int'];
-  currentPage: Scalars['Int'];
-};
-
-export type PaginatedDiagnosisResponse = {
-  items: Array<DiagnosisResponse>;
-  total: Scalars['Int'];
-  totalPages: Scalars['Int'];
-  limit: Scalars['Int'];
-  currentPage: Scalars['Int'];
-};
-
-export type PaginatedDiagnosisTypeResponse = {
-  items: Array<DiagnosisTypeResponse>;
-  total: Scalars['Int'];
-  totalPages: Scalars['Int'];
-  limit: Scalars['Int'];
-  currentPage: Scalars['Int'];
-};
-
 export type PaginatedFilesResponse = {
   items: Array<FilesResponse>;
-  total: Scalars['Int'];
-  totalPages: Scalars['Int'];
-  limit: Scalars['Int'];
-  currentPage: Scalars['Int'];
-};
-
-export type PaginatedHabeasDataResponse = {
-  items: Array<HabeasDataResponse>;
   total: Scalars['Int'];
   totalPages: Scalars['Int'];
   limit: Scalars['Int'];
@@ -2102,24 +1495,8 @@ export type PaginatedHeadquartersResponse = {
   currentPage: Scalars['Int'];
 };
 
-export type PaginatedIndicationsPatientResponse = {
-  items: Array<IndicationsPatientResponse>;
-  total: Scalars['Int'];
-  totalPages: Scalars['Int'];
-  limit: Scalars['Int'];
-  currentPage: Scalars['Int'];
-};
-
-export type PaginatedInformedConsentResponse = {
-  items: Array<InformedConsentResponse>;
-  total: Scalars['Int'];
-  totalPages: Scalars['Int'];
-  limit: Scalars['Int'];
-  currentPage: Scalars['Int'];
-};
-
-export type PaginatedLaboratoryExamsResponse = {
-  items: Array<LaboratoryExamsResponse>;
+export type PaginatedMedicalRecordsResponse = {
+  items: Array<MedicalRecordsResponse>;
   total: Scalars['Int'];
   totalPages: Scalars['Int'];
   limit: Scalars['Int'];
@@ -2134,22 +1511,6 @@ export type PaginatedMedicalSpecialtiesResponse = {
   currentPage: Scalars['Int'];
 };
 
-export type PaginatedMedicinesResponse = {
-  items: Array<MedicinesResponse>;
-  total: Scalars['Int'];
-  totalPages: Scalars['Int'];
-  limit: Scalars['Int'];
-  currentPage: Scalars['Int'];
-};
-
-export type PaginatedMembershipResponse = {
-  items: Array<MembershipResponse>;
-  total: Scalars['Int'];
-  totalPages: Scalars['Int'];
-  limit: Scalars['Int'];
-  currentPage: Scalars['Int'];
-};
-
 export type PaginatedNotificationResponse = {
   items: Array<NotificationResponse>;
   total: Scalars['Int'];
@@ -2158,32 +1519,48 @@ export type PaginatedNotificationResponse = {
   currentPage: Scalars['Int'];
 };
 
-export type PaginatedPathologiesResponse = {
-  items: Array<PathologiesResponse>;
+export type PaginatedPatientResponse = {
+  items: Array<PatientResponse>;
   total: Scalars['Int'];
   totalPages: Scalars['Int'];
   limit: Scalars['Int'];
   currentPage: Scalars['Int'];
 };
 
-export type PaginatedPatientDataSettingsResponse = {
-  items: Array<PatientDataSettingsResponse>;
+export type PaginatedPharmacologicalManagementResponse = {
+  items: Array<PharmacologicalManagementResponse>;
   total: Scalars['Int'];
   totalPages: Scalars['Int'];
   limit: Scalars['Int'];
   currentPage: Scalars['Int'];
 };
 
-export type PaginatedPatientSafetyCheckResponse = {
-  items: Array<PatientSafetyCheckResponse>;
+export type PaginatedQuickComprehensiveManagementResponse = {
+  items: Array<QuickComprehensiveManagementResponse>;
   total: Scalars['Int'];
   totalPages: Scalars['Int'];
   limit: Scalars['Int'];
   currentPage: Scalars['Int'];
 };
 
-export type PaginatedProceduresResponse = {
-  items: Array<ProceduresResponse>;
+export type PaginatedQuickMedicalHistoryResponse = {
+  items: Array<QuickMedicalHistoryResponse>;
+  total: Scalars['Int'];
+  totalPages: Scalars['Int'];
+  limit: Scalars['Int'];
+  currentPage: Scalars['Int'];
+};
+
+export type PaginatedQuickParaclinicsEvaluationsResponse = {
+  items: Array<QuickParaclinicsEvaluationsResponse>;
+  total: Scalars['Int'];
+  totalPages: Scalars['Int'];
+  limit: Scalars['Int'];
+  currentPage: Scalars['Int'];
+};
+
+export type PaginatedQuickPhysicalExamResponse = {
+  items: Array<QuickPhysicalExamResponse>;
   total: Scalars['Int'];
   totalPages: Scalars['Int'];
   limit: Scalars['Int'];
@@ -2192,14 +1569,6 @@ export type PaginatedProceduresResponse = {
 
 export type PaginatedRoleResponse = {
   items: Array<RoleResponse>;
-  total: Scalars['Int'];
-  totalPages: Scalars['Int'];
-  limit: Scalars['Int'];
-  currentPage: Scalars['Int'];
-};
-
-export type PaginatedSettingResponse = {
-  items: Array<SettingResponse>;
   total: Scalars['Int'];
   totalPages: Scalars['Int'];
   limit: Scalars['Int'];
@@ -2243,24 +1612,6 @@ export type PaginatorParams = {
   limit?: Maybe<Scalars['Int']>;
 };
 
-export type PartialDataParameterizationInput = {
-  paymentDeadlines?: Maybe<Scalars['Float']>;
-  deadlineForPaymentReminder?: Maybe<Scalars['Float']>;
-  deadlineForAppointmentReminder?: Maybe<Scalars['Float']>;
-};
-
-export type PartialDiagnosisInput = {
-  code?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-  isActive?: Maybe<Scalars['Boolean']>;
-};
-
-export type PartialDiagnosisTypeInput = {
-  name?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-  isActive?: Maybe<Scalars['Boolean']>;
-};
-
 export type PartialFilesInput = {
   url?: Maybe<Scalars['String']>;
   key?: Maybe<Scalars['String']>;
@@ -2268,11 +1619,6 @@ export type PartialFilesInput = {
   bytes?: Maybe<Scalars['Float']>;
   storage?: Maybe<FileStorageType>;
   status?: Maybe<FileStatus>;
-};
-
-export type PartialHabeasDataInput = {
-  description?: Maybe<Scalars['String']>;
-  isActive?: Maybe<Scalars['Boolean']>;
 };
 
 export type PartialHeadquartersInput = {
@@ -2286,21 +1632,11 @@ export type PartialHeadquartersInput = {
   isActive?: Maybe<Scalars['Boolean']>;
 };
 
-export type PartialIndicationsPatientInput = {
+export type PartialMedicalRecordsInput = {
+  quickMedicalHistory?: Maybe<Scalars['ID']>;
+  patient?: Maybe<Scalars['ID']>;
+  medicalRecordType?: Maybe<MedicalRecordType>;
   description?: Maybe<Scalars['String']>;
-  isActive?: Maybe<Scalars['Boolean']>;
-};
-
-export type PartialInformedConsentInput = {
-  name?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-  isActive?: Maybe<Scalars['Boolean']>;
-};
-
-export type PartialLaboratoryExamsInput = {
-  code?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-  isActive?: Maybe<Scalars['Boolean']>;
 };
 
 export type PartialMedicalSpecialtiesInput = {
@@ -2309,104 +1645,32 @@ export type PartialMedicalSpecialtiesInput = {
   isActive?: Maybe<Scalars['Boolean']>;
 };
 
-export type PartialMedicinesInput = {
-  code?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-  isActive?: Maybe<Scalars['Boolean']>;
-};
-
-export type PartialMembershipInput = {
-  cost?: Maybe<Scalars['Float']>;
-  validity?: Maybe<TaxType>;
-  daysAfterExpired?: Maybe<Scalars['Int']>;
-  voiceTranscription?: Maybe<Scalars['Boolean']>;
-  limitedNumberPatients?: Maybe<Scalars['Boolean']>;
-  limitPatients?: Maybe<Scalars['Int']>;
-  useLogo?: Maybe<Scalars['Boolean']>;
-  limitedNumberHeadquarters?: Maybe<Scalars['Boolean']>;
-  limitHeadquarters?: Maybe<Scalars['Int']>;
-  administrativeUserQuantity?: Maybe<Scalars['Int']>;
-  medicalUserQuantity?: Maybe<Scalars['Int']>;
-  sendingEmailMedicalPrescription?: Maybe<Scalars['Boolean']>;
-  sendingWhatsappMedicalPrescription?: Maybe<Scalars['Boolean']>;
-  generateConsentDigitally?: Maybe<Scalars['Boolean']>;
-  schedulingAppointmentsWeb?: Maybe<Scalars['Boolean']>;
-  appointmentWotificationWhatsApp?: Maybe<Scalars['Boolean']>;
-  appointmentWotificationMail?: Maybe<Scalars['Boolean']>;
-  appointmentWotificationSms?: Maybe<Scalars['Boolean']>;
-  appointmentReminderWhatsApp?: Maybe<Scalars['Boolean']>;
-  appointmentReminderMail?: Maybe<Scalars['Boolean']>;
-  appointmentReminderSms?: Maybe<Scalars['Boolean']>;
-  NumberSmsAllowed?: Maybe<Scalars['Int']>;
-  sendingMessagesSpecialDates?: Maybe<Scalars['Boolean']>;
-  sendingMailSpecialDates?: Maybe<Scalars['Boolean']>;
-  sendingWhatsAppSpecialDates?: Maybe<Scalars['Boolean']>;
-  allowPromotionalEmailing?: Maybe<Scalars['Boolean']>;
-  AllowQuotesClients?: Maybe<Scalars['Boolean']>;
-  inventoryAndBilling?: Maybe<Scalars['Boolean']>;
-  hoursAllowedVideoConsultation?: Maybe<Scalars['Int']>;
-  integrationWithPaymentGateway?: Maybe<Scalars['Boolean']>;
-  additionalCostHeadquarters?: Maybe<Scalars['Float']>;
-  additionalCostPerAdministrativeUser?: Maybe<Scalars['Float']>;
-  additionalCostPerMedicalUser?: Maybe<Scalars['Float']>;
-  additionalCostHoursVideoConsultation?: Maybe<Scalars['Float']>;
-  additionalCostSmsPackage?: Maybe<Scalars['Float']>;
-  isActive?: Maybe<Scalars['Boolean']>;
-};
-
 export type PartialNotificationInput = {
   isRead?: Maybe<Scalars['Boolean']>;
 };
 
-export type PartialPathologiesInput = {
-  code?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-  isActive?: Maybe<Scalars['Boolean']>;
-};
-
-export type PartialPatientDataSettingsInput = {
-  firstName?: Maybe<Scalars['Boolean']>;
-  lastName?: Maybe<Scalars['Boolean']>;
-  firstSurname?: Maybe<Scalars['Boolean']>;
-  lastSurname?: Maybe<Scalars['Boolean']>;
-  dateOfBirth?: Maybe<Scalars['Boolean']>;
-  gender?: Maybe<Scalars['Boolean']>;
-  maritalStatus?: Maybe<Scalars['Boolean']>;
-  bloodType?: Maybe<Scalars['Boolean']>;
-  vitalStatus?: Maybe<Scalars['Boolean']>;
-  contactInformation?: Maybe<Scalars['Boolean']>;
-  landlinePhoneNumber?: Maybe<Scalars['Boolean']>;
-  phoneNumber?: Maybe<Scalars['Boolean']>;
-  patientHeadquarters?: Maybe<Scalars['Boolean']>;
-  mainAddress?: Maybe<Scalars['Boolean']>;
-  secondaryHeadquarters?: Maybe<Scalars['Boolean']>;
-  countryDepartmentCity?: Maybe<Scalars['Boolean']>;
-  email?: Maybe<Scalars['Boolean']>;
-  socialSecurity?: Maybe<Scalars['Boolean']>;
-  affiliateType?: Maybe<Scalars['Boolean']>;
-  affiliateTypeSsg?: Maybe<Scalars['Boolean']>;
-  educationLevel?: Maybe<Scalars['Boolean']>;
-  ethnicGroup?: Maybe<Scalars['Boolean']>;
-  populationGroup?: Maybe<Scalars['Boolean']>;
-  occupation?: Maybe<Scalars['Boolean']>;
-  eps?: Maybe<Scalars['Boolean']>;
-  affiliateDate?: Maybe<Scalars['Boolean']>;
-  prepaid?: Maybe<Scalars['Boolean']>;
-  benefitPlan?: Maybe<Scalars['Boolean']>;
-  healthCareProgram?: Maybe<Scalars['Boolean']>;
-  generalNotesAttention?: Maybe<Scalars['Boolean']>;
-  contractNumber?: Maybe<Scalars['Boolean']>;
-  occupationalRiskManagement?: Maybe<Scalars['Boolean']>;
-  pensionFundManagement?: Maybe<Scalars['Boolean']>;
-  companion?: Maybe<Scalars['Boolean']>;
-  companionName?: Maybe<Scalars['Boolean']>;
-  kinshipCompanion?: Maybe<Scalars['Boolean']>;
-  companionPhone?: Maybe<Scalars['Boolean']>;
-};
-
-export type PartialPatientSafetyCheckInput = {
-  description?: Maybe<Scalars['String']>;
-  isActive?: Maybe<Scalars['Boolean']>;
+export type PartialPatientInput = {
+  lastName?: Maybe<Scalars['String']>;
+  firstName?: Maybe<Scalars['String']>;
+  firstSurName?: Maybe<Scalars['String']>;
+  lastSurName?: Maybe<Scalars['String']>;
+  dateOfBirth?: Maybe<Scalars['String']>;
+  gender?: Maybe<UserGender>;
+  documentType?: Maybe<DocumentType>;
+  documentNumber?: Maybe<Scalars['String']>;
+  placeOfBirth?: Maybe<Scalars['String']>;
+  linkedType?: Maybe<LinkedType>;
+  maritalStatus?: Maybe<MaritalStatus>;
+  affiliateType?: Maybe<AffiliateType>;
+  insuranceType?: Maybe<InsuranceType>;
+  insuranceName?: Maybe<Scalars['String']>;
+  homeAddress?: Maybe<Scalars['String']>;
+  neighborhood?: Maybe<Scalars['String']>;
+  municipality?: Maybe<Scalars['String']>;
+  homePhone?: Maybe<Scalars['String']>;
+  officePhone?: Maybe<Scalars['String']>;
+  occupation?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
 };
 
 export type PartialPermitsInput = {
@@ -2414,10 +1678,11 @@ export type PartialPermitsInput = {
   action?: Maybe<Action_List>;
 };
 
-export type PartialProceduresInput = {
-  code?: Maybe<Scalars['String']>;
+export type PartialPharmacologicalManagementInput = {
+  quickMedicalHistory?: Maybe<Scalars['ID']>;
+  patient?: Maybe<Scalars['ID']>;
+  item?: Maybe<Scalars['Int']>;
   description?: Maybe<Scalars['String']>;
-  isActive?: Maybe<Scalars['Boolean']>;
 };
 
 export type PartialProfileInput = {
@@ -2438,18 +1703,59 @@ export type PartialProfileInput = {
   position?: Maybe<Scalars['ID']>;
 };
 
+export type PartialQuickComprehensiveManagementInput = {
+  quickMedicalHistory?: Maybe<Scalars['ID']>;
+  patient?: Maybe<Scalars['ID']>;
+  physicalTherapy?: Maybe<Scalars['String']>;
+  occupationalTherapy?: Maybe<Scalars['String']>;
+  nutrition?: Maybe<Scalars['String']>;
+  psychology?: Maybe<Scalars['String']>;
+  languageTherapy?: Maybe<Scalars['String']>;
+  respiratoryTherapy?: Maybe<Scalars['String']>;
+  socialWork?: Maybe<Scalars['String']>;
+  nursingAssistant?: Maybe<Scalars['String']>;
+};
+
+export type PartialQuickMedicalHistoryInput = {
+  patient?: Maybe<Scalars['ID']>;
+  quickMedicalHistoryType?: Maybe<QuickMedicalHistoryType>;
+  companionsName?: Maybe<Scalars['String']>;
+  companionsPhoneNumber?: Maybe<Scalars['String']>;
+  companionsType?: Maybe<Scalars['String']>;
+  responsableName?: Maybe<Scalars['String']>;
+  responsablePhoneNumber?: Maybe<Scalars['String']>;
+  responsableOfficeNumber?: Maybe<Scalars['String']>;
+  reasonForConsultation?: Maybe<Scalars['String']>;
+  relationship?: Maybe<Scalars['String']>;
+  currentIllness?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+};
+
+export type PartialQuickParaclinicsEvaluationsInput = {
+  quickMedicalHistory?: Maybe<Scalars['ID']>;
+  patient?: Maybe<Scalars['ID']>;
+  paraclinics?: Maybe<Scalars['String']>;
+  evaluations?: Maybe<Scalars['String']>;
+};
+
+export type PartialQuickPhysicalExamInput = {
+  quickMedicalHistory?: Maybe<Scalars['ID']>;
+  patient?: Maybe<Scalars['ID']>;
+  bloodPressure?: Maybe<Scalars['String']>;
+  heartRate?: Maybe<Scalars['String']>;
+  breathingFrequency?: Maybe<Scalars['String']>;
+  oxygenSaturation?: Maybe<Scalars['String']>;
+  temperature?: Maybe<Scalars['String']>;
+  glucometry?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  clinicalAnalysis?: Maybe<Scalars['String']>;
+  diagnosticImpression?: Maybe<Scalars['String']>;
+};
+
 export type PartialRoleInput = {
   name?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   permits?: Maybe<Array<PartialPermitsInput>>;
-};
-
-export type PartialSettingInput = {
-  email?: Maybe<Scalars['String']>;
-  address?: Maybe<Scalars['String']>;
-  phoneNumber?: Maybe<Scalars['String']>;
-  isActive?: Maybe<Scalars['Boolean']>;
-  logo?: Maybe<Scalars['ID']>;
 };
 
 export type PartialTenantInput = {
@@ -2482,89 +1788,45 @@ export type PartialUserPositionInput = {
   isActive?: Maybe<Scalars['Boolean']>;
 };
 
-export type PathologiesFilterFilter = {
-  and?: Maybe<Array<PathologiesFilterFilter>>;
-  or?: Maybe<Array<PathologiesFilterFilter>>;
+export type PatientFilterFilter = {
+  and?: Maybe<Array<PatientFilterFilter>>;
+  or?: Maybe<Array<PatientFilterFilter>>;
   id?: Maybe<StringFieldComparison>;
-  code?: Maybe<StringFieldComparison>;
-  description?: Maybe<StringFieldComparison>;
+  lastName?: Maybe<StringFieldComparison>;
+  firstName?: Maybe<StringFieldComparison>;
+  firstSurName?: Maybe<StringFieldComparison>;
+  lastSurName?: Maybe<StringFieldComparison>;
+  documentNumber?: Maybe<StringFieldComparison>;
+  insuranceName?: Maybe<StringFieldComparison>;
+  placeOfBirth?: Maybe<StringFieldComparison>;
+  email?: Maybe<StringFieldComparison>;
   createdAt?: Maybe<DateFieldComparison>;
   updatedAt?: Maybe<DateFieldComparison>;
 };
 
-export type PathologiesResponse = {
+export type PatientResponse = {
   id: Scalars['ID'];
-  code: Scalars['String'];
-  description?: Maybe<Scalars['String']>;
-  isActive: Scalars['Boolean'];
-  createdAt?: Maybe<Scalars['DateTime']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-};
-
-export type PatientDataSettingsFilterFilter = {
-  and?: Maybe<Array<PatientDataSettingsFilterFilter>>;
-  or?: Maybe<Array<PatientDataSettingsFilterFilter>>;
-  id?: Maybe<StringFieldComparison>;
-  createdAt?: Maybe<DateFieldComparison>;
-  updatedAt?: Maybe<DateFieldComparison>;
-};
-
-export type PatientDataSettingsResponse = {
-  id: Scalars['ID'];
-  firstName: Scalars['Boolean'];
-  lastName: Scalars['Boolean'];
-  firstSurname: Scalars['Boolean'];
-  lastSurname: Scalars['Boolean'];
-  dateOfBirth: Scalars['Boolean'];
-  gender: Scalars['Boolean'];
-  maritalStatus: Scalars['Boolean'];
-  bloodType: Scalars['Boolean'];
-  vitalStatus: Scalars['Boolean'];
-  contactInformation: Scalars['Boolean'];
-  landlinePhoneNumber: Scalars['Boolean'];
-  phoneNumber: Scalars['Boolean'];
-  patientHeadquarters: Scalars['Boolean'];
-  mainAddress: Scalars['Boolean'];
-  secondaryHeadquarters: Scalars['Boolean'];
-  countryDepartmentCity: Scalars['Boolean'];
-  email: Scalars['Boolean'];
-  socialSecurity: Scalars['Boolean'];
-  affiliateType: Scalars['Boolean'];
-  affiliateTypeSsg: Scalars['Boolean'];
-  educationLevel: Scalars['Boolean'];
-  ethnicGroup: Scalars['Boolean'];
-  populationGroup: Scalars['Boolean'];
-  occupation: Scalars['Boolean'];
-  eps: Scalars['Boolean'];
-  affiliateDate: Scalars['Boolean'];
-  prepaid: Scalars['Boolean'];
-  benefitPlan: Scalars['Boolean'];
-  healthCareProgram: Scalars['Boolean'];
-  generalNotesAttention: Scalars['Boolean'];
-  contractNumber: Scalars['Boolean'];
-  occupationalRiskManagement: Scalars['Boolean'];
-  pensionFundManagement: Scalars['Boolean'];
-  companion: Scalars['Boolean'];
-  companionName: Scalars['Boolean'];
-  kinshipCompanion: Scalars['Boolean'];
-  companionPhone: Scalars['Boolean'];
-  createdAt?: Maybe<Scalars['DateTime']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-};
-
-export type PatientSafetyCheckFilterFilter = {
-  and?: Maybe<Array<PatientSafetyCheckFilterFilter>>;
-  or?: Maybe<Array<PatientSafetyCheckFilterFilter>>;
-  id?: Maybe<StringFieldComparison>;
-  description?: Maybe<StringFieldComparison>;
-  createdAt?: Maybe<DateFieldComparison>;
-  updatedAt?: Maybe<DateFieldComparison>;
-};
-
-export type PatientSafetyCheckResponse = {
-  id: Scalars['ID'];
-  description: Scalars['String'];
-  isActive: Scalars['Boolean'];
+  lastName?: Maybe<Scalars['String']>;
+  firstName?: Maybe<Scalars['String']>;
+  firstSurName?: Maybe<Scalars['String']>;
+  lastSurName?: Maybe<Scalars['String']>;
+  dateOfBirth?: Maybe<Scalars['String']>;
+  gender?: Maybe<UserGender>;
+  documentType?: Maybe<DocumentType>;
+  documentNumber?: Maybe<Scalars['String']>;
+  maritalStatus?: Maybe<MaritalStatus>;
+  insuranceType?: Maybe<InsuranceType>;
+  affiliateType?: Maybe<AffiliateType>;
+  linkedType?: Maybe<LinkedType>;
+  homeAddress?: Maybe<Scalars['String']>;
+  insuranceName?: Maybe<Scalars['String']>;
+  placeOfBirth?: Maybe<Scalars['String']>;
+  neighborhood?: Maybe<Scalars['String']>;
+  municipality?: Maybe<Scalars['String']>;
+  homePhone?: Maybe<Scalars['String']>;
+  officePhone?: Maybe<Scalars['String']>;
+  occupation?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
 };
@@ -2579,9 +1841,9 @@ export type PermitsResponse = {
   action: Action_List;
 };
 
-export type ProceduresFilterFilter = {
-  and?: Maybe<Array<ProceduresFilterFilter>>;
-  or?: Maybe<Array<ProceduresFilterFilter>>;
+export type PharmacologicalManagementFilterFilter = {
+  and?: Maybe<Array<PharmacologicalManagementFilterFilter>>;
+  or?: Maybe<Array<PharmacologicalManagementFilterFilter>>;
   id?: Maybe<StringFieldComparison>;
   name?: Maybe<StringFieldComparison>;
   description?: Maybe<StringFieldComparison>;
@@ -2589,11 +1851,12 @@ export type ProceduresFilterFilter = {
   updatedAt?: Maybe<DateFieldComparison>;
 };
 
-export type ProceduresResponse = {
+export type PharmacologicalManagementResponse = {
   id: Scalars['ID'];
-  code: Scalars['String'];
-  description?: Maybe<Scalars['String']>;
-  isActive: Scalars['Boolean'];
+  quickMedicalHistory?: Maybe<SolvedEntityResponse>;
+  patient?: Maybe<SolvedEntityResponse>;
+  item: Scalars['Int'];
+  description: Scalars['String'];
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
 };
@@ -2686,51 +1949,30 @@ export type Query = {
   getAllHeadquarters: Array<HeadquartersResponse>;
   getOneHeadquarters?: Maybe<HeadquartersResponse>;
   getPaginatedHeadquarters?: Maybe<PaginatedHeadquartersResponse>;
-  getAllSetting: Array<SettingResponse>;
-  getOneSetting?: Maybe<SettingResponse>;
-  getPaginatedSetting?: Maybe<PaginatedSettingResponse>;
-  getAllMembership: Array<MembershipResponse>;
-  getOneMembership?: Maybe<MembershipResponse>;
-  getPaginatedMembership?: Maybe<PaginatedMembershipResponse>;
-  getAllDataParameterization: Array<DataParameterizationResponse>;
-  getOneDataParameterization?: Maybe<DataParameterizationResponse>;
-  getPaginatedDataParameterization?: Maybe<PaginatedDataParameterizationResponse>;
-  getAllPatientDataSettings: Array<PatientDataSettingsResponse>;
-  getOnePatientDataSettings?: Maybe<PatientDataSettingsResponse>;
-  getPaginatedPatientDataSettings?: Maybe<PaginatedPatientDataSettingsResponse>;
   getAllMedicalSpecialties: Array<MedicalSpecialtiesResponse>;
   getOneMedicalSpecialties?: Maybe<MedicalSpecialtiesResponse>;
   getPaginatedMedicalSpecialties?: Maybe<PaginatedMedicalSpecialtiesResponse>;
-  getAllDiagnosisType: Array<DiagnosisTypeResponse>;
-  getOneDiagnosisType?: Maybe<DiagnosisTypeResponse>;
-  getPaginatedDiagnosisType?: Maybe<PaginatedDiagnosisTypeResponse>;
-  getAllDiagnosis: Array<DiagnosisResponse>;
-  getOneDiagnosis?: Maybe<DiagnosisResponse>;
-  getPaginatedDiagnosis?: Maybe<PaginatedDiagnosisResponse>;
-  getAllProcedures: Array<ProceduresResponse>;
-  getOneProcedures?: Maybe<ProceduresResponse>;
-  getPaginatedProcedures?: Maybe<PaginatedProceduresResponse>;
-  getAllIndicationsPatient: Array<IndicationsPatientResponse>;
-  getOneIndicationsPatient?: Maybe<IndicationsPatientResponse>;
-  getPaginatedIndicationsPatient?: Maybe<PaginatedIndicationsPatientResponse>;
-  getAllHabeasData: Array<HabeasDataResponse>;
-  getOneHabeasData?: Maybe<HabeasDataResponse>;
-  getPaginatedHabeasData?: Maybe<PaginatedHabeasDataResponse>;
-  getAllInformedConsent: Array<InformedConsentResponse>;
-  getOneInformedConsent?: Maybe<InformedConsentResponse>;
-  getPaginatedInformedConsent?: Maybe<PaginatedInformedConsentResponse>;
-  getAllPatientSafetyCheck: Array<PatientSafetyCheckResponse>;
-  getOnePatientSafetyCheck?: Maybe<PatientSafetyCheckResponse>;
-  getPaginatedPatientSafetyCheck?: Maybe<PaginatedPatientSafetyCheckResponse>;
-  getAllLaboratoryExams: Array<LaboratoryExamsResponse>;
-  getOneLaboratoryExams?: Maybe<LaboratoryExamsResponse>;
-  getPaginatedLaboratoryExams?: Maybe<PaginatedLaboratoryExamsResponse>;
-  getAllMedicines: Array<MedicinesResponse>;
-  getOneMedicines?: Maybe<MedicinesResponse>;
-  getPaginatedMedicines?: Maybe<PaginatedMedicinesResponse>;
-  getAllPathologies: Array<PathologiesResponse>;
-  getOnePathologies?: Maybe<PathologiesResponse>;
-  getPaginatedPathologies?: Maybe<PaginatedPathologiesResponse>;
+  getAllPatient: Array<PatientResponse>;
+  getOnePatient?: Maybe<PatientResponse>;
+  getPaginatedPatient?: Maybe<PaginatedPatientResponse>;
+  getAllQuickMedicalHistory: Array<QuickMedicalHistoryResponse>;
+  getOneQuickMedicalHistory?: Maybe<QuickMedicalHistoryResponse>;
+  getPaginatedQuickMedicalHistory?: Maybe<PaginatedQuickMedicalHistoryResponse>;
+  getAllMedicalRecords: Array<MedicalRecordsResponse>;
+  getOneMedicalRecords?: Maybe<MedicalRecordsResponse>;
+  getPaginatedMedicalRecords?: Maybe<PaginatedMedicalRecordsResponse>;
+  getAllQuickPhysicalExam: Array<QuickPhysicalExamResponse>;
+  getOneQuickPhysicalExam?: Maybe<QuickPhysicalExamResponse>;
+  getPaginatedQuickPhysicalExam?: Maybe<PaginatedQuickPhysicalExamResponse>;
+  getAllPharmacologicalManagement: Array<PharmacologicalManagementResponse>;
+  getOnePharmacologicalManagement?: Maybe<PharmacologicalManagementResponse>;
+  getPaginatedPharmacologicalManagement?: Maybe<PaginatedPharmacologicalManagementResponse>;
+  getAllQuickComprehensiveManagement: Array<QuickComprehensiveManagementResponse>;
+  getOneQuickComprehensiveManagement?: Maybe<QuickComprehensiveManagementResponse>;
+  getPaginatedQuickComprehensiveManagement?: Maybe<PaginatedQuickComprehensiveManagementResponse>;
+  getAllQuickParaclinicsEvaluations: Array<QuickParaclinicsEvaluationsResponse>;
+  getOneQuickParaclinicsEvaluations?: Maybe<QuickParaclinicsEvaluationsResponse>;
+  getPaginatedQuickParaclinicsEvaluations?: Maybe<PaginatedQuickParaclinicsEvaluationsResponse>;
 };
 
 
@@ -2869,66 +2111,6 @@ export type QueryGetPaginatedHeadquartersArgs = {
 };
 
 
-export type QueryGetAllSettingArgs = {
-  input?: Maybe<GetAllSettingInput>;
-};
-
-
-export type QueryGetOneSettingArgs = {
-  input?: Maybe<GetOneSettingInput>;
-};
-
-
-export type QueryGetPaginatedSettingArgs = {
-  input?: Maybe<GetPaginatedSettingInput>;
-};
-
-
-export type QueryGetAllMembershipArgs = {
-  input?: Maybe<GetAllMembershipInput>;
-};
-
-
-export type QueryGetOneMembershipArgs = {
-  input?: Maybe<GetOneMembershipInput>;
-};
-
-
-export type QueryGetPaginatedMembershipArgs = {
-  input?: Maybe<GetPaginatedMembershipInput>;
-};
-
-
-export type QueryGetAllDataParameterizationArgs = {
-  input?: Maybe<GetAllDataParameterizationInput>;
-};
-
-
-export type QueryGetOneDataParameterizationArgs = {
-  input?: Maybe<GetOneDataParameterizationInput>;
-};
-
-
-export type QueryGetPaginatedDataParameterizationArgs = {
-  input?: Maybe<GetPaginatedDataParameterizationInput>;
-};
-
-
-export type QueryGetAllPatientDataSettingsArgs = {
-  input?: Maybe<GetAllPatientDataSettingsInput>;
-};
-
-
-export type QueryGetOnePatientDataSettingsArgs = {
-  input?: Maybe<GetOnePatientDataSettingsInput>;
-};
-
-
-export type QueryGetPaginatedPatientDataSettingsArgs = {
-  input?: Maybe<GetPaginatedPatientDataSettingsInput>;
-};
-
-
 export type QueryGetAllMedicalSpecialtiesArgs = {
   input?: Maybe<GetAllMedicalSpecialtiesInput>;
 };
@@ -2944,153 +2126,222 @@ export type QueryGetPaginatedMedicalSpecialtiesArgs = {
 };
 
 
-export type QueryGetAllDiagnosisTypeArgs = {
-  input?: Maybe<GetAllDiagnosisTypeInput>;
+export type QueryGetAllPatientArgs = {
+  input?: Maybe<GetAllPatientInput>;
 };
 
 
-export type QueryGetOneDiagnosisTypeArgs = {
-  input?: Maybe<GetOneDiagnosisTypeInput>;
+export type QueryGetOnePatientArgs = {
+  input?: Maybe<GetOnePatientInput>;
 };
 
 
-export type QueryGetPaginatedDiagnosisTypeArgs = {
-  input?: Maybe<GetPaginatedDiagnosisTypeInput>;
+export type QueryGetPaginatedPatientArgs = {
+  input?: Maybe<GetPaginatedPatientInput>;
 };
 
 
-export type QueryGetAllDiagnosisArgs = {
-  input?: Maybe<GetAllDiagnosisInput>;
+export type QueryGetAllQuickMedicalHistoryArgs = {
+  input?: Maybe<GetAllQuickMedicalHistoryInput>;
 };
 
 
-export type QueryGetOneDiagnosisArgs = {
-  input?: Maybe<GetOneDiagnosisInput>;
+export type QueryGetOneQuickMedicalHistoryArgs = {
+  input?: Maybe<GetOneQuickMedicalHistoryInput>;
 };
 
 
-export type QueryGetPaginatedDiagnosisArgs = {
-  input?: Maybe<GetPaginatedDiagnosisInput>;
+export type QueryGetPaginatedQuickMedicalHistoryArgs = {
+  input?: Maybe<GetPaginatedQuickMedicalHistoryInput>;
 };
 
 
-export type QueryGetAllProceduresArgs = {
-  input?: Maybe<GetAllProceduresInput>;
+export type QueryGetAllMedicalRecordsArgs = {
+  input?: Maybe<GetAllMedicalRecordsInput>;
 };
 
 
-export type QueryGetOneProceduresArgs = {
-  input?: Maybe<GetOneProceduresInput>;
+export type QueryGetOneMedicalRecordsArgs = {
+  input?: Maybe<GetOneMedicalRecordsInput>;
 };
 
 
-export type QueryGetPaginatedProceduresArgs = {
-  input?: Maybe<GetPaginatedProceduresInput>;
+export type QueryGetPaginatedMedicalRecordsArgs = {
+  input?: Maybe<GetPaginatedMedicalRecordsInput>;
 };
 
 
-export type QueryGetAllIndicationsPatientArgs = {
-  input?: Maybe<GetAllIndicationsPatientInput>;
+export type QueryGetAllQuickPhysicalExamArgs = {
+  input?: Maybe<GetAllQuickPhysicalExamInput>;
 };
 
 
-export type QueryGetOneIndicationsPatientArgs = {
-  input?: Maybe<GetOneIndicationsPatientInput>;
+export type QueryGetOneQuickPhysicalExamArgs = {
+  input?: Maybe<GetOneQuickPhysicalExamInput>;
 };
 
 
-export type QueryGetPaginatedIndicationsPatientArgs = {
-  input?: Maybe<GetPaginatedIndicationsPatientInput>;
+export type QueryGetPaginatedQuickPhysicalExamArgs = {
+  input?: Maybe<GetPaginatedQuickPhysicalExamInput>;
 };
 
 
-export type QueryGetAllHabeasDataArgs = {
-  input?: Maybe<GetAllHabeasDataInput>;
+export type QueryGetAllPharmacologicalManagementArgs = {
+  input?: Maybe<GetAllPharmacologicalManagementInput>;
 };
 
 
-export type QueryGetOneHabeasDataArgs = {
-  input?: Maybe<GetOneHabeasDataInput>;
+export type QueryGetOnePharmacologicalManagementArgs = {
+  input?: Maybe<GetOnePharmacologicalManagementInput>;
 };
 
 
-export type QueryGetPaginatedHabeasDataArgs = {
-  input?: Maybe<GetPaginatedHabeasDataInput>;
+export type QueryGetPaginatedPharmacologicalManagementArgs = {
+  input?: Maybe<GetPaginatedPharmacologicalManagementInput>;
 };
 
 
-export type QueryGetAllInformedConsentArgs = {
-  input?: Maybe<GetAllInformedConsentInput>;
+export type QueryGetAllQuickComprehensiveManagementArgs = {
+  input?: Maybe<GetAllQuickComprehensiveManagementInput>;
 };
 
 
-export type QueryGetOneInformedConsentArgs = {
-  input?: Maybe<GetOneInformedConsentInput>;
+export type QueryGetOneQuickComprehensiveManagementArgs = {
+  input?: Maybe<GetOneQuickComprehensiveManagementInput>;
 };
 
 
-export type QueryGetPaginatedInformedConsentArgs = {
-  input?: Maybe<GetPaginatedInformedConsentInput>;
+export type QueryGetPaginatedQuickComprehensiveManagementArgs = {
+  input?: Maybe<GetPaginatedQuickComprehensiveManagementInput>;
 };
 
 
-export type QueryGetAllPatientSafetyCheckArgs = {
-  input?: Maybe<GetAllPatientSafetyCheckInput>;
+export type QueryGetAllQuickParaclinicsEvaluationsArgs = {
+  input?: Maybe<GetAllQuickParaclinicsEvaluationsInput>;
 };
 
 
-export type QueryGetOnePatientSafetyCheckArgs = {
-  input?: Maybe<GetOnePatientSafetyCheckInput>;
+export type QueryGetOneQuickParaclinicsEvaluationsArgs = {
+  input?: Maybe<GetOneQuickParaclinicsEvaluationsInput>;
 };
 
 
-export type QueryGetPaginatedPatientSafetyCheckArgs = {
-  input?: Maybe<GetPaginatedPatientSafetyCheckInput>;
+export type QueryGetPaginatedQuickParaclinicsEvaluationsArgs = {
+  input?: Maybe<GetPaginatedQuickParaclinicsEvaluationsInput>;
 };
 
-
-export type QueryGetAllLaboratoryExamsArgs = {
-  input?: Maybe<GetAllLaboratoryExamsInput>;
+export type QuickComprehensiveManagementFilterFilter = {
+  and?: Maybe<Array<QuickComprehensiveManagementFilterFilter>>;
+  or?: Maybe<Array<QuickComprehensiveManagementFilterFilter>>;
+  id?: Maybe<StringFieldComparison>;
+  name?: Maybe<StringFieldComparison>;
+  description?: Maybe<StringFieldComparison>;
+  createdAt?: Maybe<DateFieldComparison>;
+  updatedAt?: Maybe<DateFieldComparison>;
 };
 
-
-export type QueryGetOneLaboratoryExamsArgs = {
-  input?: Maybe<GetOneLaboratoryExamsInput>;
+export type QuickComprehensiveManagementResponse = {
+  id: Scalars['ID'];
+  quickMedicalHistory?: Maybe<SolvedEntityResponse>;
+  patient?: Maybe<SolvedEntityResponse>;
+  physicalTherapy?: Maybe<Scalars['String']>;
+  occupationalTherapy?: Maybe<Scalars['String']>;
+  nutrition?: Maybe<Scalars['String']>;
+  psychology?: Maybe<Scalars['String']>;
+  languageTherapy?: Maybe<Scalars['String']>;
+  respiratoryTherapy?: Maybe<Scalars['String']>;
+  socialWork?: Maybe<Scalars['String']>;
+  nursingAssistant?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
-
-export type QueryGetPaginatedLaboratoryExamsArgs = {
-  input?: Maybe<GetPaginatedLaboratoryExamsInput>;
+export type QuickMedicalHistoryFilterFilter = {
+  and?: Maybe<Array<QuickMedicalHistoryFilterFilter>>;
+  or?: Maybe<Array<QuickMedicalHistoryFilterFilter>>;
+  id?: Maybe<StringFieldComparison>;
+  name?: Maybe<StringFieldComparison>;
+  description?: Maybe<StringFieldComparison>;
+  createdAt?: Maybe<DateFieldComparison>;
+  updatedAt?: Maybe<DateFieldComparison>;
 };
 
-
-export type QueryGetAllMedicinesArgs = {
-  input?: Maybe<GetAllMedicinesInput>;
+export type QuickMedicalHistoryResponse = {
+  id: Scalars['ID'];
+  patient?: Maybe<SolvedEntityResponse>;
+  quickMedicalHistoryType?: Maybe<QuickMedicalHistoryType>;
+  companionsName?: Maybe<Scalars['String']>;
+  companionsPhoneNumber?: Maybe<Scalars['String']>;
+  companionsType?: Maybe<Scalars['String']>;
+  responsableName?: Maybe<Scalars['String']>;
+  responsablePhoneNumber?: Maybe<Scalars['String']>;
+  responsableOfficeNumber?: Maybe<Scalars['String']>;
+  reasonForConsultation?: Maybe<Scalars['String']>;
+  relationship?: Maybe<Scalars['String']>;
+  currentIllness?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
+export enum QuickMedicalHistoryType {
+  AcuteHospitalExtension = 'ACUTE_HOSPITAL_EXTENSION',
+  AcuteHealthAtHome = 'ACUTE_HEALTH_AT_HOME',
+  ChronicWithoutNursing = 'CHRONIC_WITHOUT_NURSING',
+  ChronicWithNursing = 'CHRONIC_WITH_NURSING'
+}
 
-export type QueryGetOneMedicinesArgs = {
-  input?: Maybe<GetOneMedicinesInput>;
+export type QuickParaclinicsEvaluationsFilterFilter = {
+  and?: Maybe<Array<QuickParaclinicsEvaluationsFilterFilter>>;
+  or?: Maybe<Array<QuickParaclinicsEvaluationsFilterFilter>>;
+  id?: Maybe<StringFieldComparison>;
+  name?: Maybe<StringFieldComparison>;
+  description?: Maybe<StringFieldComparison>;
+  createdAt?: Maybe<DateFieldComparison>;
+  updatedAt?: Maybe<DateFieldComparison>;
 };
 
-
-export type QueryGetPaginatedMedicinesArgs = {
-  input?: Maybe<GetPaginatedMedicinesInput>;
+export type QuickParaclinicsEvaluationsResponse = {
+  id: Scalars['ID'];
+  quickMedicalHistory?: Maybe<SolvedEntityResponse>;
+  patient?: Maybe<SolvedEntityResponse>;
+  paraclinics?: Maybe<Scalars['String']>;
+  evaluations?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
-
-export type QueryGetAllPathologiesArgs = {
-  input?: Maybe<GetAllPathologiesInput>;
+export type QuickPhysicalExamFilterFilter = {
+  and?: Maybe<Array<QuickPhysicalExamFilterFilter>>;
+  or?: Maybe<Array<QuickPhysicalExamFilterFilter>>;
+  id?: Maybe<StringFieldComparison>;
+  bloodPressure?: Maybe<StringFieldComparison>;
+  heartRate?: Maybe<StringFieldComparison>;
+  breathingFrequency?: Maybe<StringFieldComparison>;
+  oxygenSaturation?: Maybe<StringFieldComparison>;
+  temperature?: Maybe<StringFieldComparison>;
+  glucometry?: Maybe<StringFieldComparison>;
+  description?: Maybe<StringFieldComparison>;
+  clinicalAnalysis?: Maybe<StringFieldComparison>;
+  diagnosticImpression?: Maybe<StringFieldComparison>;
+  createdAt?: Maybe<DateFieldComparison>;
+  updatedAt?: Maybe<DateFieldComparison>;
 };
 
-
-export type QueryGetOnePathologiesArgs = {
-  input?: Maybe<GetOnePathologiesInput>;
-};
-
-
-export type QueryGetPaginatedPathologiesArgs = {
-  input?: Maybe<GetPaginatedPathologiesInput>;
+export type QuickPhysicalExamResponse = {
+  id: Scalars['ID'];
+  quickMedicalHistory?: Maybe<SolvedEntityResponse>;
+  patient?: Maybe<SolvedEntityResponse>;
+  bloodPressure?: Maybe<Scalars['String']>;
+  heartRate?: Maybe<Scalars['String']>;
+  breathingFrequency?: Maybe<Scalars['String']>;
+  oxygenSaturation?: Maybe<Scalars['String']>;
+  temperature?: Maybe<Scalars['String']>;
+  glucometry?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  clinicalAnalysis?: Maybe<Scalars['String']>;
+  diagnosticImpression?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
 export type ResetPasswordInput = {
@@ -3112,27 +2363,6 @@ export type RoleResponse = {
   name: Scalars['String'];
   description?: Maybe<Scalars['String']>;
   permits: Array<PermitsResponse>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-};
-
-export type SettingFilterFilter = {
-  and?: Maybe<Array<SettingFilterFilter>>;
-  or?: Maybe<Array<SettingFilterFilter>>;
-  email?: Maybe<StringFieldComparison>;
-  address?: Maybe<StringFieldComparison>;
-  phoneNumber?: Maybe<StringFieldComparison>;
-  createdAt?: Maybe<DateFieldComparison>;
-  updatedAt?: Maybe<DateFieldComparison>;
-};
-
-export type SettingResponse = {
-  id: Scalars['ID'];
-  email?: Maybe<Scalars['String']>;
-  address?: Maybe<Scalars['String']>;
-  phoneNumber?: Maybe<Scalars['String']>;
-  isActive: Scalars['Boolean'];
-  logo?: Maybe<CloudFileResponse>;
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
 };
@@ -3190,14 +2420,6 @@ export type Subscription = {
 export type SubscriptionOnCreateNotificationArgs = {
   toUser: Scalars['String'];
 };
-
-export enum TaxType {
-  Monthly = 'MONTHLY',
-  Bimonthly = 'BIMONTHLY',
-  Quarterly = 'QUARTERLY',
-  Biannual = 'BIANNUAL',
-  Annual = 'ANNUAL'
-}
 
 export enum TenantCurrency {
   Usd = 'USD',
@@ -3266,49 +2488,14 @@ export type TenantResponsibleResponse = {
   phoneNumber?: Maybe<Scalars['String']>;
 };
 
-export type UpdateDataParameterizationInput = {
-  entityId: Scalars['ID'];
-  update: PartialDataParameterizationInput;
-};
-
-export type UpdateDiagnosisInput = {
-  entityId: Scalars['ID'];
-  update: PartialDiagnosisInput;
-};
-
-export type UpdateDiagnosisTypeInput = {
-  entityId: Scalars['ID'];
-  update: PartialDiagnosisTypeInput;
-};
-
 export type UpdateFilesInput = {
   entityId: Scalars['ID'];
   update: PartialFilesInput;
 };
 
-export type UpdateHabeasDataInput = {
-  entityId: Scalars['ID'];
-  update: PartialHabeasDataInput;
-};
-
 export type UpdateHeadquartersInput = {
   entityId: Scalars['ID'];
   update: PartialHeadquartersInput;
-};
-
-export type UpdateIndicationsPatientInput = {
-  entityId: Scalars['ID'];
-  update: PartialIndicationsPatientInput;
-};
-
-export type UpdateInformedConsentInput = {
-  entityId: Scalars['ID'];
-  update: PartialInformedConsentInput;
-};
-
-export type UpdateLaboratoryExamsInput = {
-  entityId: Scalars['ID'];
-  update: PartialLaboratoryExamsInput;
 };
 
 export type UpdateMeInput = {
@@ -3319,19 +2506,14 @@ export type UpdateMeInput = {
   profile?: Maybe<PartialProfileInput>;
 };
 
+export type UpdateMedicalRecordsInput = {
+  entityId: Scalars['ID'];
+  update: PartialMedicalRecordsInput;
+};
+
 export type UpdateMedicalSpecialtiesInput = {
   entityId: Scalars['ID'];
   update: PartialMedicalSpecialtiesInput;
-};
-
-export type UpdateMedicinesInput = {
-  entityId: Scalars['ID'];
-  update: PartialMedicinesInput;
-};
-
-export type UpdateMembershipInput = {
-  entityId: Scalars['ID'];
-  update: PartialMembershipInput;
 };
 
 export type UpdateNotificationInput = {
@@ -3339,34 +2521,39 @@ export type UpdateNotificationInput = {
   update: PartialNotificationInput;
 };
 
-export type UpdatePathologiesInput = {
+export type UpdatePatientInput = {
   entityId: Scalars['ID'];
-  update: PartialPathologiesInput;
+  update: PartialPatientInput;
 };
 
-export type UpdatePatientDataSettingsInput = {
+export type UpdatePharmacologicalManagementInput = {
   entityId: Scalars['ID'];
-  update: PartialPatientDataSettingsInput;
+  update: PartialPharmacologicalManagementInput;
 };
 
-export type UpdatePatientSafetyCheckInput = {
+export type UpdateQuickComprehensiveManagementInput = {
   entityId: Scalars['ID'];
-  update: PartialPatientSafetyCheckInput;
+  update: PartialQuickComprehensiveManagementInput;
 };
 
-export type UpdateProceduresInput = {
+export type UpdateQuickMedicalHistoryInput = {
   entityId: Scalars['ID'];
-  update: PartialProceduresInput;
+  update: PartialQuickMedicalHistoryInput;
+};
+
+export type UpdateQuickParaclinicsEvaluationsInput = {
+  entityId: Scalars['ID'];
+  update: PartialQuickParaclinicsEvaluationsInput;
+};
+
+export type UpdateQuickPhysicalExamInput = {
+  entityId: Scalars['ID'];
+  update: PartialQuickPhysicalExamInput;
 };
 
 export type UpdateRoleInput = {
   entityId: Scalars['ID'];
   update: PartialRoleInput;
-};
-
-export type UpdateSettingInput = {
-  entityId: Scalars['ID'];
-  update: PartialSettingInput;
 };
 
 export type UpdateTenantInput = {

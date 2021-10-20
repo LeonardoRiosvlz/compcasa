@@ -1,0 +1,28 @@
+fragment PatientFragment on PatientResponse {
+    id
+    lastName
+    firstName
+    lastSurName
+    firstSurName
+    dateOfBirth
+    gender
+    documentType
+    documentNumber
+    placeOfBirth
+    linkedType
+    affiliateType
+    insuranceType
+    insuranceName
+    maritalStatus
+    homeAddress 
+    neighborhood 
+    municipality
+    homePhone 
+    officePhone
+    occupation
+    email 
+    createdAt
+    updatedAt
+}
+
+

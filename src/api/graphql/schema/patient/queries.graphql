@@ -1,0 +1,24 @@
+query getAllPatient($input: GetAllPatientInput! ){
+    getAllPatient(input: $input){
+        ...PatientFragment
+    }
+}
+
+query getPaginatedPatient($input: GetPaginatedPatientInput!){
+    getPaginatedPatient(input: $input){
+        total
+        totalPages
+        currentPage
+        items{
+            ...PatientFragment
+        }
+    }
+}
+
+query getOnePatient($input: GetOnePatientInput! ){
+    getOnePatient(input: $input){
+        ...PatientFragment
+    }
+}
+
+
