@@ -1,0 +1,23 @@
+const locale = {
+	HELLO: 'Hola',
+	PATIENT:'Paciente',
+	COMPANION_NAME:'Nombre del acompañante',
+	QUICK_MEDICAL_HISTORY_TYPE:'Tipo de historia',
+	RESPONSIBLE_NAME:'Nombre del responsable',
+	RESPONSIBLE_PHONE_NUMBER:'Teléfono del responsable',
+	RESPONSIBLE_OFFICE_NUMBER:'Número del oficina',
+	RELATIONSHIP:'Parentezco',
+	CURRENT_ILLNESS:'Enfermedad actual',
+	ACUTE_HOSPITAL_EXTENSION: 'Agudo extension hospitalaria ',
+	ACUTE_HEALTH_AT_HOME: 'Agudo salud en casa ',
+	CHRONIC_WITHOUT_NURSING: 'Crónico sin enfemería',
+	CHRONIC_WITH_NURSING: 'Crónico con enfermería',
+	COMPANIONS_PHONE_NUMBER: 'Número del acompañante',
+	COMPANIONS_NAME: 'Acompañante',
+	MEDICAL_RECORDS: 'Registro Médico',
+	PHARMACOLOGICAL_MANAGEMENT: 'Gestión farmacológica',
+	COMPREHENSIVE_MANAGEMENT: 'Gestión integral',
+	PARACLINICS_EVALUATIONS: 'Evaluación paraclínica ',
+	PHYSICAL_EXAM: 'Exámen físico',
+};
+export default locale;

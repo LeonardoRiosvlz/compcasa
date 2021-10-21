@@ -23,11 +23,10 @@ const locale = {
 	MEDICINES:'Medicines',
 	PATHOLOGIES :'Pathologies',
 	AREAS: 'Areas',
-	TRANSCODER: 'Transcoder',
-	FFMPG_OPTIONS: 'Ffmpg options',
-	FFMPG: 'Ffmpeg',
-	FFMPG_TEMPLATE: 'Ffmpeg templates',
-	
+	PATIENT: 'Pacientes',
+	QUICK_MEDICAL_HISTORY:'Quick Medical History',
+	FORMULAS:'Formulas',
+	 
 };
 
 export default locale;

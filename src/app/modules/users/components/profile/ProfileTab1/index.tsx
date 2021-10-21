@@ -93,10 +93,10 @@ const ProfileTab1: React.FC<Props> = (props: Props) => {
 						<AppBar position="static" elevation={0}>
 							<Toolbar className="px-8">
 								<Typography variant="subtitle1" color="inherit" className="flex-1 px-12">
-									Friends
+									Médicos
 								</Typography>
 								<Button color="inherit" size="small">
-									See 454 more
+									Ver..
 								</Button>
 							</Toolbar>
 						</AppBar>
@@ -105,59 +105,35 @@ const ProfileTab1: React.FC<Props> = (props: Props) => {
 								<img
 									key={friend.id}
 									className="w-64 m-4 rounded-4 block"
-									src={friend.avatar}
+									src="https://th.bing.com/th/id/OIP.0CCHD4VdyH-icG_AtGF6RwFSFS?pid=ImgDet&rs=1"
+									alt={friend.name}
+								/>
+							))}
+						</CardContent>
+					</Card>
+					<Card className="w-full mb-16 rounded-8 shadow">
+						<AppBar position="static" elevation={0}>
+							<Toolbar className="px-8">
+								<Typography variant="subtitle1" color="inherit" className="flex-1 px-12">
+									Enfermeros
+								</Typography>
+								<Button color="inherit" size="small">
+									Ver..
+								</Button>
+							</Toolbar>
+						</AppBar>
+						<CardContent className="flex flex-wrap p-8">
+							{friends.map((friend: any) => (
+								<img
+									key={friend.id}
+									className="w-64 m-4 rounded-4 block"
+									src="https://th.bing.com/th/id/R.904071e94eac6bbfb781bcebec61110b?rik=1A7XZ1md%2brQPxA&pid=ImgRaw&r=0"
 									alt={friend.name}
 								/>
 							))}
 						</CardContent>
 					</Card>
 
-					<Card className="w-full mb-16 rounded-8 shadow">
-						<AppBar position="static" elevation={0}>
-							<Toolbar className="px-8">
-								<Typography variant="subtitle1" color="inherit" className="flex-1 px-12">
-									Joined Groups
-								</Typography>
-								<Button color="inherit" size="small">
-									See 6 more
-								</Button>
-							</Toolbar>
-						</AppBar>
-						<CardContent className="p-0">
-							<List className="p-0">
-								{groups.map((group: any) => (
-									<ListItem key={group.id} className="px-8">
-										<Avatar className="mx-8" alt={group.name}>
-											{group.name[0]}
-										</Avatar>
-										<ListItemText
-											primary={
-												<div className="flex">
-													<Typography
-														className="font-medium"
-														color="secondary"
-														paragraph={false}
-													>
-														{group.name}
-													</Typography>
-
-													<Typography className="mx-4" paragraph={false}>
-														{group.category}
-													</Typography>
-												</div>
-											}
-											secondary={group.members}
-										/>
-										<ListItemSecondaryAction>
-											<IconButton>
-												<Icon>more_vert</Icon>
-											</IconButton>
-										</ListItemSecondaryAction>
-									</ListItem>
-								))}
-							</List>
-						</CardContent>
-					</Card>
 				</FuseAnimateGroup>
 			</div>
 		</div>

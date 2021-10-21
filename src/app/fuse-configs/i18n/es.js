@@ -12,7 +12,7 @@ const locale = {
 	MEDICAL_SPECIALTIES:'Especialidades médicas',
 	DIAGNOSIS_TYPE:'Tipos De diagnósticos',
 	DIAGNOSIS:'Diagnósticos',
-	PROCEDURES:'Procedimientos',
+	PROCEDURES:'Procedimientos', 
 	HEADQUARTERS:'Sedes',
 	INDICATIONS_PATIENT:'Indicaciones a pacientes',
 	HABEAS_DATA:'HABEAS Data',
@@ -23,10 +23,9 @@ const locale = {
 	PATHOLOGIES :'Patologías',
 	POSITIONS: 'Cargos',
 	AREAS: 'Áreas',
-	TRANSCODER: 'Transcodificador',
-	FFMPG_OPTIONS: 'Opciones Ffmpg',
-	FFMPG: 'Ffmpeg',
-	FFMPG_TEMPLATE: 'Plantillas Ffmpeg',
+	PATIENT: 'Pacientes',
+	QUICK_MEDICAL_HISTORY:'Historia médica rápida',
+	FORMULAS:'Fórmulas',
 	
 };
 

@@ -10,8 +10,7 @@ const PatientModuleConfig: any = {
 		{
 			path: '/patient',
 			component: React.lazy(() => import('./pages/PatientTablePage'))
-		},
-
+		}
 
 	]
 };

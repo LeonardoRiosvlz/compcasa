@@ -1,0 +1,24 @@
+query getAllQuickMedicalHistory($input: GetAllQuickMedicalHistoryInput! ){
+    getAllQuickMedicalHistory(input: $input){
+        ...QuickMedicalHistoryFragment
+    }
+}
+
+query getPaginatedQuickMedicalHistory($input: GetPaginatedQuickMedicalHistoryInput!){
+    getPaginatedQuickMedicalHistory(input: $input){
+        total
+        totalPages
+        currentPage
+        items{
+            ...QuickMedicalHistoryFragment
+        }
+    }
+}
+
+query getOneQuickMedicalHistory($input: GetOneQuickMedicalHistoryInput! ){
+    getOneQuickMedicalHistory(input: $input){
+        ...QuickMedicalHistoryFragment
+    }
+}
+
+

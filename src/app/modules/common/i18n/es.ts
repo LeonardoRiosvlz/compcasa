@@ -84,25 +84,9 @@ const locale = {
     OPTIONS: 'Opciones',
     FROM: 'Desde',
     TO: 'Hasta',
-    PATIENT:"Pacientes",
-    LINKED_TYPE:"Tipo de vinculado",
-    INSURANCE_NAME:'Nombre del seguro',
-	INSURANCE_TYPE:'Tipo del seguro',
-	PLACE_OF_BIRTH:'Lugar de nacimiento',
-	NEIGHBORHOOD:'Barrio',
-	MUNICIPALITY:'Municipio',
-	HOME_PHONE:'Teléfono de casa',
-	OFFICE_PHONE:'Teléfono de oficina',
-	OCCUPATION:'Ocupación',
 
+    PATIENT: 'Pacientes',
 
-
-
-    FIRST_NAME: 'Primer Nombre',
-	LAST_NAME: 'Segundo Nombre',
-	FIRST_SUR_NAME: 'Primer Apellido',
-	LAST_SUR_NAME: 'Segundo Apellido',
-	DATE_OF_BIRTH: 'Fecha de nacimiento',
     HOME_ADDRESS: 'Dirección',
     USER_AREA: 'Área de Usuario',
     USER_LEVELS: 'Niveles de Usuario',
@@ -174,10 +158,6 @@ const locale = {
     TRANSCODER_TRANSCODER: 'Transcodificar',
     ADVANCED_OPTIONS: 'Opciones avanzadas',
     IMPORTANT: 'Importante!',
-    TRANSCODE_SUCCESS: 'Transcodificación Satisfactoria',
-    TRANSCODE_ERROR: 'Error en la transcodificación',
-    FFMPG_TEMPLATES: 'Plantillas FFMPG',
-    FFMPG_TEMPLATE: 'Plantilla FFMPG',
     MANAGER: 'Responsable',
 };
 export default locale;

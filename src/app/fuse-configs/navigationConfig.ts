@@ -57,14 +57,6 @@ const navigationConfig: Array<MenuItem> = [
                         type: 'item',
                         url: '/user/roles',
                         exact: true
-                    },
-                    {
-                        id: App_Modules.Users,
-                        title: 'Membership',
-                        translate: 'MEMBERSHIP',
-                        type: 'item',
-                        url: '/user/roles',
-                        exact: true
                     }
                     /* {
                          id: App_Modules.UserPosition,
@@ -103,15 +95,7 @@ const navigationConfig: Array<MenuItem> = [
                 type: 'item',
                 url: '/headquarters',
                 exact: true
-            },
-            {
-                id: App_Modules.Patient,
-                title: 'Data Patient',
-                translate: 'PATIENT',
-                type: 'item',
-                url: '/patient',
-                exact: true
-            }    
+            }   
         ]
     },
     {
@@ -130,85 +114,22 @@ const navigationConfig: Array<MenuItem> = [
                 exact: true
             },
             {
-                id: App_Modules.MedicalSpecialties,
-                title: 'Diagnosis Type',
-                translate: 'DIAGNOSIS_TYPE',
+                id: App_Modules.Patient,
+                title: 'Data Patient',
+                translate: 'PATIENT',
                 type: 'item',
-                url: '/diagnosis-type',
+                url: '/patient',
                 exact: true
             },
             {
-                id: App_Modules.MedicalSpecialties,
-                title: 'Diagnosis',
-                translate: 'DIAGNOSIS',
+                id: App_Modules.QuickMedicalHistory,
+                title: 'Quick Medical History',
+                translate: 'QUICK_MEDICAL_HISTORY',
                 type: 'item',
-                url: '/diagnosis',
+                url: '/quick-medical-history',
                 exact: true
-            },      
-            {
-                id: App_Modules.Users,
-                title: 'Procedures',
-                translate: 'PROCEDURES',
-                type: 'item',
-                url: '/transcoder',
-                exact: true
-            },  
-            {
-                id: App_Modules.Users,
-                title: 'Indications Patiens',
-                translate: 'INDICATIONS_PATIENT',
-                type: 'item',
-                url: '/transcoder',
-                exact: true
-            }, 
-            {
-                id: App_Modules.Users,
-                title: 'Habeas Data',
-                translate: 'HABEAS_DATA',
-                type: 'item',
-                url: '/transcoder',
-                exact: true
-            }, 
-            {
-                id: App_Modules.Users,
-                title: 'Informed Consent',
-                translate: 'INFORMED_CONSENT',
-                type: 'item',
-                url: '/transcoder',
-                exact: true
-            }, 
-            {
-                id: App_Modules.Users,
-                title: 'Patient safety check',
-                translate: 'PATIENT_SAFETY_CHECK',
-                type: 'item',
-                url: '/transcoder',
-                exact: true
-            }, 
-            {
-                id: App_Modules.Users,
-                title: 'Laboratory Exams',
-                translate: 'LABORATORY_EXAMS',
-                type: 'item',
-                url: '/transcoder',
-                exact: true
-            }, 
-            {
-                id: App_Modules.Users,
-                title: 'Medicines',
-                translate: 'MEDICINES',
-                type: 'item',
-                url: '/transcoder',
-                exact: true
-            },
-            {
-                id: App_Modules.Users,
-                title: 'Pathologies',
-                translate: 'PATHOLOGIES',
-                type: 'item',
-                url: '/transcoder',
-                exact: true
-            }
+            }   
+
         ]
     }
 ]

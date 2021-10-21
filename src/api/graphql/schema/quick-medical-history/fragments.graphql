@@ -1,0 +1,18 @@
+fragment QuickMedicalHistoryFragment on QuickMedicalHistoryResponse {
+    id
+    patient{
+        ...SolvedEntityFragment
+    }
+    quickMedicalHistoryType
+    companionsName
+    companionsPhoneNumber
+    companionsType
+    responsibleName
+    responsiblePhoneNumber
+    responsibleOfficeNumber
+    relationship
+    currentIllness
+    createdAt
+    updatedAt
+}
+

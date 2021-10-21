@@ -2,6 +2,7 @@ import React from 'react';
 import {useTranslation} from 'react-i18next';
 import GenericTable from 'app/modules/common/components/GenericTable';
 import {useAppDispatch, useAppSelector} from 'app/modules/common/hooks/use-app-redux';
+
 import {
     GenericTableState,
     setContext,
@@ -13,31 +14,31 @@ import {RowsDef, TableAction} from 'app/modules/common/components/GenericTable/G
 import _ from '@lodash';
 import GenericModal from 'app/modules/common/components/GenericModal';
 
-
+import moment from 'moment';
 import {toast} from 'react-toastify';
 import {FormUtils} from 'app/modules/common/utils/FormUtils';
 
-import PatientForm, {PatientFormField} from '../Form';
-import PatientDetails from '../Details';
-import {Patient} from 'api/repositories/patient/types/patient.types';
+import QuickMedicalHistoryForm, {QuickMedicalHistoryFormField} from '../Form';
+import QuickMedicalHistoryDetails from '../Details';
+import {QuickMedicalHistory} from 'api/repositories/quick-medical-history/types/quick-medical-history.types';
 import ConfirmDialog from 'app/modules/common/components/ConfirmDialog';
 import BooleanCell from 'app/modules/common/components/TableCell/BooleanCell';
 import {Action_List, App_Modules} from 'api/graphql/schema/types';
 import usePermits from 'app/modules/auth/hooks/use-permits';
 import useRepository from "app/modules/common/hooks/use-repository";
-import {PatientRepository} from "api/repositories/patient/patient.repository";
+import {QuickMedicalHistoryRepository} from "api/repositories/quick-medical-history/quick-medical-history.repository";
 import {IPaginatedEntity} from "api/interfaces/IPaginatedEntity";
 
 
 type DialogState = { view: boolean, add: boolean, edit: boolean, delete: boolean, deleteMany: false }
 type CrudLoadingState = DialogState
 type Props = {}
-const PatientTable: React.FC<Props> = (props: Props) => {
-    const {t} = useTranslation(['patient', 'common']);
+const QuickMedicalHistoryTable: React.FC<Props> = (props: Props) => {
+    const {t} = useTranslation(['quick-medical-history', 'common']);
     const dispatch = useAppDispatch();
     const {hasPermission} = usePermits();
     const {paginator, query, context, selected} = useAppSelector(state => state.table) as GenericTableState;
-    const patientRepo = useRepository(PatientRepository)
+    const quickMedicalHistoryRepo = useRepository(QuickMedicalHistoryRepository)
     const paginatorInput = paginator.in;
 
     const [dialog, setDialog] = React.useState<DialogState>({
@@ -56,7 +57,7 @@ const PatientTable: React.FC<Props> = (props: Props) => {
     });
 
 
-    const selectedItem = _.first(selected) as Patient;
+    const selectedItem = _.first(selected) as QuickMedicalHistory;
     const handleOpenDialog = (type: keyof DialogState): void => {
         setDialog({...dialog, [type]: true});
     };
@@ -69,7 +70,7 @@ const PatientTable: React.FC<Props> = (props: Props) => {
 
     React.useEffect(() => {
         // @ts-ignore
-        dispatch(setContext(App_Modules.Patient));
+        dispatch(setContext(App_Modules.QuickMedicalHistory));
     }, []);
 
     React.useEffect(() => {
@@ -79,22 +80,19 @@ const PatientTable: React.FC<Props> = (props: Props) => {
     const fetch = () => {
         // @ts-ignore
         dispatch(setLoading(true));
-        patientRepo.findPaginated(
+        quickMedicalHistoryRepo.findPaginated(
             {
                 input: {
                     paginator: {limit: paginatorInput.rowsPerPage, page: paginatorInput.page},
                     where: query ? {or: [
-                                            {firstName: {iLike: query}}, 
-                                            {lastName: {iLike: query}}, 
-                                            {firstSurName: {iLike: query}},
-                                            {lastSurName: {iLike: query}},
-                                            {documentNumber: {iLike: query}},
-                                            {placeOfBirth: {iLike: query}},
-                                            {insuranceName: {iLike: query}},
-                                            {email: {iLike: query}},
+                                            {quickMedicalHistoryType: {iLike: query}}, 
+                                            {companionsName: {iLike: query}},
+                                            {companionsPhoneNumber: {iLike: query}},
+                                            {companionsType: {iLike: query}},
+                                            {responsiblePhoneNumber: {iLike: query}},
                                         ]} : {}
                 }
-            }).then((res: IPaginatedEntity<Patient>) => {
+            }).then((res: IPaginatedEntity<QuickMedicalHistory>) => {
             // @ts-ignore
             dispatch(setPaginatedData(res));
         }).catch((err: any) => {
@@ -105,9 +103,9 @@ const PatientTable: React.FC<Props> = (props: Props) => {
     };
 
 
-    const addAction = (formData: PatientFormField) => {
+    const addAction = (formData: QuickMedicalHistoryFormField) => {
         setCrudLoading({...crudLoading, add: true});
-        patientRepo.create({input: {...formData}}).then(() => {
+        quickMedicalHistoryRepo.create({input: {...formData}}).then(() => {
             setCrudLoading({...crudLoading, add: false});
             handleCloseDialog('add');
             fetch();
@@ -119,12 +117,12 @@ const PatientTable: React.FC<Props> = (props: Props) => {
         });
     };
 
-    const editAction = (formData: PatientFormField) => {
+    const editAction = (formData: QuickMedicalHistoryFormField) => {
         setCrudLoading({...crudLoading, edit: true});
 
-        const toUpdateData = FormUtils.toUpdateValue<PatientFormField, Patient>(formData, selectedItem);
+        const toUpdateData = FormUtils.toUpdateValue<QuickMedicalHistoryFormField, QuickMedicalHistory>(formData, selectedItem);
 
-        patientRepo.update({
+        quickMedicalHistoryRepo.update({
             input: {
                 entityId: selectedItem?.id,
                 update: {...toUpdateData}
@@ -143,7 +141,7 @@ const PatientTable: React.FC<Props> = (props: Props) => {
     const removeAction = () => {
         setCrudLoading({...crudLoading, delete: true});
 
-        patientRepo.delete({input: {entityId: selectedItem?.id}}).then(() => {
+        quickMedicalHistoryRepo.delete({input: {entityId: selectedItem?.id}}).then(() => {
             setCrudLoading({...crudLoading, delete: false});
             handleCloseDialog('delete');
             fetch();
@@ -159,7 +157,7 @@ const PatientTable: React.FC<Props> = (props: Props) => {
         setCrudLoading({...crudLoading, delete: true});
         const ids: Array<string> = selected.map(x => x.id);
 
-        patientRepo.deleteMany({input: {where: {id: {in: ids}}}}).then(() => {
+        quickMedicalHistoryRepo.deleteMany({input: {where: {id: {in: ids}}}}).then(() => {
             setCrudLoading({...crudLoading, delete: false});
             handleCloseDialog('deleteMany');
             fetch();
@@ -172,37 +170,36 @@ const PatientTable: React.FC<Props> = (props: Props) => {
     };
 
 
-    const rows: Array<RowsDef<Patient>> = [
+    const rows: Array<RowsDef<QuickMedicalHistory>> = [
         {
-            id: 'firstName',
+            id: 'patient.identifier',
             align: 'left',
             sort: true,
-            label: t('FIRST_NAME')
+            label: t('common:PATIENT'),
+            render:(row)=><label>{row?.patient?.identifier}</label>
         },
         {
-            id: 'firstSurName',
+            id: 'quickMedicalHistoryType',
             align: 'left',
             sort: true,
-            label: t('FIRST_SUR_NAME')
+            label: t('QUICK_MEDICAL_HISTORY_TYPE'),
+            render:(row)=><label>{t(row?.quickMedicalHistoryType)}</label>
+            
         },
         {
-            id: 'documentNumber',
+            id: 'companionsName',
             align: 'left',
             sort: true,
-            label: t('DOCUMENT_NUMBER')
+            label: t('COMPANIONS_NAME')
         },
         {
-            id: 'email',
+            id: 'companionsPhoneNumber',
             align: 'left',
             sort: true,
-            label: t('common:EMAIL')
-        },
-        {
-            id: 'homePhone',
-            align: 'left',
-            sort: true,
-            label: t('HOME_PHONE')
+            label: t('common:DATE'),
+            render:(row)=><label>{  moment(row?.createdAt).format('DD/MM/YYYY h:sA')}</label>
         }
+
     ];
 
     const actions: Array<TableAction> = [
@@ -224,49 +221,43 @@ const PatientTable: React.FC<Props> = (props: Props) => {
             disabled: !hasPermission(context, Action_List.DeleteOne)
         },
         {
-            label: t('FORMULAS'),
-            action: (record) => handleOpenDialog('view'),
+            label: t('MEDICAL_RECORDS'),
+            action: (record) => handleOpenDialog('delete'),
             icon: '',
             disabled: !hasPermission(context, Action_List.DeleteOne)
         },
         {
-            label: t('REFERRALS'),
-            action: (record) => handleOpenDialog('view'),
+            label: t('PHARMACOLOGICAL_MANAGEMENT'),
+            action: (record) => handleOpenDialog('delete'),
             icon: '',
             disabled: !hasPermission(context, Action_List.DeleteOne)
         },
         {
-            label: t('THERAPIES'),
-            action: (record) => handleOpenDialog('view'),
+            label: t('COMPREHENSIVE_MANAGEMENT'),
+            action: (record) => handleOpenDialog('delete'),
             icon: '',
             disabled: !hasPermission(context, Action_List.DeleteOne)
         },
         {
-            label: t('LABORATORIES'),
-            action: (record) => handleOpenDialog('view'),
+            label: t('PARACLINICS_EVALUATIONS'),
+            action: (record) => handleOpenDialog('delete'),
             icon: '',
             disabled: !hasPermission(context, Action_List.DeleteOne)
         },
         {
-            label: t('GLOBAL_HISTORY'),
-            action: (record) => handleOpenDialog('view'),
+            label: t('PHYSICAL_EXAM'),
+            action: (record) => handleOpenDialog('delete'),
             icon: '',
             disabled: !hasPermission(context, Action_List.DeleteOne)
         },
-        {
-            label: t('ANNEXES'),
-            action: (record) => handleOpenDialog('view'),
-            icon: '',
-            disabled: !hasPermission(context, Action_List.DeleteOne)
-        }
-        
-        
+ 
+ 
     ];
 
 
     const formId = {
-        edit: `edit-patient`,
-        add: `add-patient`
+        edit: `edit-quick-medical-history`,
+        add: `add-quick-medical-history`
     };
 
     // @ts-ignore
@@ -276,7 +267,7 @@ const PatientTable: React.FC<Props> = (props: Props) => {
                               addBtn
                               headerIcon={'area_chart'}
                               onAddAction={() => handleOpenDialog('add')}
-                              title={t('common:PATIENT')}
+                              title={t('common:QUICK_MEDICAL_HISTORY')}
                               options={{actionColumn: true}}
                               onCheckSelectedMenuClick={() => handleOpenDialog('deleteMany')}
                               actions={actions}/>
@@ -289,7 +280,7 @@ const PatientTable: React.FC<Props> = (props: Props) => {
                           handleOk={() => handleCloseDialog('view')}
                           okBtnTxt={t('common:CLOSE')}>
                 <div className='w-full p-4'>
-                    <PatientDetails row={selectedItem}/>
+                    <QuickMedicalHistoryDetails row={selectedItem}/>
                 </div>
             </GenericModal>
 
@@ -302,7 +293,7 @@ const PatientTable: React.FC<Props> = (props: Props) => {
                           okLoading={crudLoading.add}
                           okBtnTxt={t('common:ADD')}>
                 <div className='w-full p-4 mt-16'>
-                    <PatientForm
+                    <QuickMedicalHistoryForm
                         upLoading={() => setCrudLoading({ ...crudLoading, add: true })}
                         submitAction={addAction}
                         formId={formId.add}/>
@@ -314,15 +305,16 @@ const PatientTable: React.FC<Props> = (props: Props) => {
                           onClose={() => handleCloseDialog('edit')}
                           open={dialog.edit}
                           okLoading={crudLoading.edit}
-                          title={`${t('common:EDIT')} : ${selectedItem?.firstName}`}
+                          title={`${t('common:EDIT')} : ${selectedItem?.patient.identifier}`}
                           okBtnTxt={t('common:EDIT')}
                           cancelBtn
                           formId={formId.edit}>
                 <div className='w-full p-4 mt-16'>
-                    <PatientForm
+                    <QuickMedicalHistoryForm
                         upLoading={() => setCrudLoading({ ...crudLoading, edit: true })}
                         initialData={{
-                        ...FormUtils.setInitialData<Patient, PatientFormField>(selectedItem)
+                        ...FormUtils.setInitialData<QuickMedicalHistory, QuickMedicalHistoryFormField>(selectedItem,['patient']),
+                        patient:selectedItem?.patient?.id
                     }}
                                   submitAction={editAction}
                                   formId={formId.edit}/>
@@ -355,4 +347,4 @@ const PatientTable: React.FC<Props> = (props: Props) => {
     );
 };
 
-export default PatientTable;
+export default QuickMedicalHistoryTable;

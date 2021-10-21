@@ -129,7 +129,7 @@ const PatientForm: React.FC<Props> = ({submitAction, initialFiles, upLoading, fo
                         <TextField
                             {...field}
                             size='small'
-                            label={t('common:FIRST_NAME')}
+                            label={t('FIRST_NAME')}
                             autoFocus
                             variant="outlined"
                             fullWidth
@@ -148,7 +148,7 @@ const PatientForm: React.FC<Props> = ({submitAction, initialFiles, upLoading, fo
                         <TextField
                             {...field}
                             size='small'
-                            label={t('common:LAST_NAME')}
+                            label={t('LAST_NAME')}
                             autoFocus
                             variant="outlined"
                             fullWidth
@@ -167,7 +167,7 @@ const PatientForm: React.FC<Props> = ({submitAction, initialFiles, upLoading, fo
                         <TextField
                             {...field}
                             size='small'
-                            label={t('common:FIRST_SUR_NAME')}
+                            label={t('FIRST_SUR_NAME')}
                             autoFocus
                             variant="outlined"
                             fullWidth
@@ -186,7 +186,7 @@ const PatientForm: React.FC<Props> = ({submitAction, initialFiles, upLoading, fo
                         <TextField
                             {...field}
                             size='small'
-                            label={t('common:LAST_SUR_NAME')}
+                            label={t('LAST_SUR_NAME')}
                             autoFocus
                             variant="outlined"
                             fullWidth
@@ -206,7 +206,7 @@ const PatientForm: React.FC<Props> = ({submitAction, initialFiles, upLoading, fo
                     {...field}
                     size='small'
                     value={moment(field.value).format('YYYY-MM-DD')}
-                    label={t('common:DATE_OF_BIRTH')}
+                    label={t('DATE_OF_BIRTH')}
                     autoFocus
                     variant="outlined"
                     fullWidth
@@ -226,13 +226,13 @@ const PatientForm: React.FC<Props> = ({submitAction, initialFiles, upLoading, fo
                     enumerator={UserGender}
                     {...field}
                     size='small'
-                    label={t('common:GENDER')}
+                    label={t('GENDER')}
                     autoFocus
                     variant="outlined"
                     fullWidth
                     i18n={{
                         enabled: true,
-                        ns: 'gender'
+                        ns: 'patient'
                     }}
                     />)} />
             </Grid>
@@ -246,13 +246,13 @@ const PatientForm: React.FC<Props> = ({submitAction, initialFiles, upLoading, fo
                     enumerator={DocumentType}
                     {...field}
                     size='small'
-                    label={t('common:DOCUMENT_TYPE')}
+                    label={t('DOCUMENT_TYPE')}
                     autoFocus
                     variant="outlined"
                     fullWidth
                     i18n={{
                         enabled: true,
-                        ns: 'document'
+                        ns: 'patient'
                     }}
                     />)} />
             </Grid>
@@ -266,7 +266,7 @@ const PatientForm: React.FC<Props> = ({submitAction, initialFiles, upLoading, fo
                         <TextField
                             {...field}
                             size='small'
-                            label={t('common:DOCUMENT_NUMBER')}
+                            label={t('DOCUMENT_NUMBER')}
                             autoFocus
                             variant="outlined"
                             fullWidth
@@ -285,13 +285,13 @@ const PatientForm: React.FC<Props> = ({submitAction, initialFiles, upLoading, fo
                     enumerator={MaritalStatus}
                     {...field}
                     size='small'
-                    label={t('common:MARITAL_STATUS')}
+                    label={t('MARITAL_STATUS')}
                     autoFocus
                     variant="outlined"
                     fullWidth
                     i18n={{
                         enabled: true,
-                        ns: 'maritalStatus'
+                        ns: 'patient'
                     }}
                     />)} />
             </Grid>
@@ -305,7 +305,7 @@ const PatientForm: React.FC<Props> = ({submitAction, initialFiles, upLoading, fo
                                    rows={2}
                                    {...field}
                                    size='small'
-                                   label={t('common:HOME_ADDRESS')}
+                                   label={t('HOME_ADDRESS')}
                                    autoFocus
                                    variant="outlined"
                                    fullWidth
@@ -321,13 +321,13 @@ const PatientForm: React.FC<Props> = ({submitAction, initialFiles, upLoading, fo
                     enumerator={InsuranceType}
                     {...field}
                     size='small'
-                    label={t('common:INSURANCE_TYPE')}
+                    label={t('INSURANCE_TYPE')}
                     autoFocus
                     variant="outlined"
                     fullWidth
                     i18n={{
                         enabled: true,
-                        ns: 'insurance'
+                        ns: 'patient'
                     }}
                     />)} />
             </Grid>
@@ -341,7 +341,7 @@ const PatientForm: React.FC<Props> = ({submitAction, initialFiles, upLoading, fo
                         <TextField
                             {...field}
                             size='small'
-                            label={t('common:INSURANCE_NAME')}
+                            label={t('INSURANCE_NAME')}
                             autoFocus
                             variant="outlined"
                             fullWidth
@@ -361,13 +361,13 @@ const PatientForm: React.FC<Props> = ({submitAction, initialFiles, upLoading, fo
                     enumerator={LinkedType}
                     {...field}
                     size='small'
-                    label={t('common:LINKED_TYPE')}
+                    label={t('LINKED_TYPE')}
                     autoFocus
                     variant="outlined"
                     fullWidth
                     i18n={{
                         enabled: true,
-                        ns: 'linkedType'
+                        ns: 'patient'
                     }}
                     />)} />
             </Grid>
@@ -383,7 +383,7 @@ const PatientForm: React.FC<Props> = ({submitAction, initialFiles, upLoading, fo
                         <TextField
                             {...field}
                             size='small'
-                            label={t('common:PLACE_OF_BIRTH')}
+                            label={t('PLACE_OF_BIRTH')}
                             autoFocus
                             variant="outlined"
                             fullWidth
@@ -402,7 +402,7 @@ const PatientForm: React.FC<Props> = ({submitAction, initialFiles, upLoading, fo
                             <TextField
                                 {...field}
                                 size='small'
-                                label={t('common:NEIGHBORHOOD')}
+                                label={t('NEIGHBORHOOD')}
                                 autoFocus
                                 variant="outlined"
                                 fullWidth
@@ -422,7 +422,7 @@ const PatientForm: React.FC<Props> = ({submitAction, initialFiles, upLoading, fo
                             <TextField
                                 {...field}
                                 size='small'
-                                label={t('common:MUNICIPALITY')}
+                                label={t('MUNICIPALITY')}
                                 autoFocus
                                 variant="outlined"
                                 fullWidth
@@ -441,7 +441,7 @@ const PatientForm: React.FC<Props> = ({submitAction, initialFiles, upLoading, fo
                             <TextField
                                 {...field}
                                 size='small'
-                                label={t('common:HOME_PHONE')}
+                                label={t('HOME_PHONE')}
                                 autoFocus
                                 variant="outlined"
                                 fullWidth
@@ -461,7 +461,7 @@ const PatientForm: React.FC<Props> = ({submitAction, initialFiles, upLoading, fo
                             <TextField
                                 {...field}
                                 size='small'
-                                label={t('common:OFFICE_PHONE')}
+                                label={t('OFFICE_PHONE')}
                                 autoFocus
                                 variant="outlined"
                                 fullWidth
@@ -481,7 +481,7 @@ const PatientForm: React.FC<Props> = ({submitAction, initialFiles, upLoading, fo
                             <TextField
                                 {...field}
                                 size='small'
-                                label={t('common:OCCUPATION')}
+                                label={t('OCCUPATION')}
                                 autoFocus
                                 variant="outlined"
                                 fullWidth
@@ -500,7 +500,7 @@ const PatientForm: React.FC<Props> = ({submitAction, initialFiles, upLoading, fo
                             <TextField
                                 {...field}
                                 size='small'
-                                label={t('common:EMAIL')}
+                                label={t('EMAIL')}
                                 autoFocus
                                 variant="outlined"
                                 fullWidth

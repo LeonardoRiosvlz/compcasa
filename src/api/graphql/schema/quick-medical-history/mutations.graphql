@@ -1,0 +1,16 @@
+mutation createQuickMedicalHistory($input: CreateQuickMedicalHistoryInput!){
+    createQuickMedicalHistory(input: $input)
+}
+
+mutation updateQuickMedicalHistory($input: UpdateQuickMedicalHistoryInput!){
+    updateQuickMedicalHistory(input: $input)
+}
+
+mutation deleteQuickMedicalHistory($input: DeleteQuickMedicalHistoryInput!){
+    deleteQuickMedicalHistory(input: $input)
+}
+
+mutation deleteManyQuickMedicalHistory($input: DeleteManyQuickMedicalHistoryInput!){
+    deleteManyQuickMedicalHistory(input: $input)
+}
+

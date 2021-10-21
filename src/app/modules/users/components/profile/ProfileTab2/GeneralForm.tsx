@@ -226,7 +226,7 @@ const GeneralInfoForm: React.FC<Props> = (props: Props) => {
 						/>
 					)}
 				/>
-			</Grid>*/}
+			</Grid>
 
             <Grid item xs={12} md={6} className='w-full p-16'>
                 <Controller
@@ -249,7 +249,7 @@ const GeneralInfoForm: React.FC<Props> = (props: Props) => {
                             }}
 
                         />)}/>
-            </Grid>
+            </Grid>*/}
 
             <Grid item xs={12} className='w-full p-16'>
                 <Controller

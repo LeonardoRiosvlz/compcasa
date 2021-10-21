@@ -84,25 +84,9 @@ const locale = {
 	OPTIONS: 'Options',
 	FROM: 'From',
 	TO: 'To',
-	PATIENT:"Patient",
-	INSURANCE_NAME:'Insurance Name',
-	INSURANCE_TYPE:'Insurance TYPE',
-	PLACE_OF_BIRTH:'Place Of Birth',
-	NEIGHBORHOOD:'Neighborhood',
-	MUNICIPALITY:'Neighborhood',
-	HOME_PHONE:'Home phone',
-	OFFICE_PHONE:'Home phone',
-	OCCUPATION:'Occupation',
-	
 
-	
-	LINKED_TYPE:"Linked Type",
-	FIRST_NAME: 'Firs Name',
-	LAST_NAME: 'Last Name',
-	FIRST_SUR_NAME: 'Last Name',
-	LAST_SUR_NAME: 'Last Name',
-	DATE_OF_BIRTH: 'Date Of Birth',
-	HOME_ADDRESS: 'Home Address',
+	PATIENT: 'Patient',
+
 	USER_AREA: 'User area',
 	USER_LEVELS: 'User levels',
 	USER_POSITION: 'User osition',
