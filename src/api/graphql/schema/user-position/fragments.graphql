@@ -1,7 +1,6 @@
 fragment UserPositionFragment on UserPositionResponse {
     id
     name
-    isActive
     description
     createdAt
     updatedAt

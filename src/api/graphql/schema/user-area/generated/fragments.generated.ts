@@ -5,10 +5,9 @@ export const UserAreaFragmentFragmentDoc = gql`
     fragment UserAreaFragment on UserAreaResponse {
   id
   name
-  isActive
   description
   createdAt
   updatedAt
 }
     `;
-export type UserAreaFragmentFragment = Pick<Types.UserAreaResponse, 'id' | 'name' | 'isActive' | 'description' | 'createdAt' | 'updatedAt'>;
+export type UserAreaFragmentFragment = Pick<Types.UserAreaResponse, 'id' | 'name' | 'description' | 'createdAt' | 'updatedAt'>;

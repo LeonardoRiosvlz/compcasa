@@ -95,7 +95,23 @@ const navigationConfig: Array<MenuItem> = [
                 type: 'item',
                 url: '/headquarters',
                 exact: true
-            }   
+            },
+            {
+                id: App_Modules.UserArea,
+                title: 'User Area',
+                translate: 'USER_AREA',
+                type: 'item',
+                url: '/user-area',
+                exact: true
+            },
+            {
+                id: App_Modules.UserPosition,
+                title: 'User Position',
+                translate: 'USER_POSITION',
+                type: 'item',
+                url: '/user-position',
+                exact: true
+            }      
         ]
     },
     {

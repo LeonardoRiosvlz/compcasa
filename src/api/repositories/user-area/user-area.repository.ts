@@ -21,9 +21,8 @@ import {
     GetPaginatedUserAreaQueryVariables,
 
 } from 'api/graphql/schema/user-area/generated/queries.generated';
+
 import {UserArea} from "./types/user-area.types";
-
-
 
 export class UserAreaRepository extends GraphqlRepository<UserArea> {
 

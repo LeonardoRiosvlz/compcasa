@@ -21,9 +21,8 @@ import {
     GetPaginatedUserPositionQueryVariables,
 
 } from 'api/graphql/schema/user-position/generated/queries.generated';
-import {UserPositionResponse} from "api/graphql/schema/types";
-import {UserPosition} from "./types/user-position.types";
 
+import {UserPosition} from "./types/user-position.types";
 
 export class UserPositionRepository extends GraphqlRepository<UserPosition> {
 

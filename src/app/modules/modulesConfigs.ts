@@ -6,6 +6,8 @@ import Headquarters from 'app/modules/headquarters/headquartersModuleConfig';
 import MedicalSpecialtiesConfig from 'app/modules/medical-specialties/medical-specialtiesModuleConfig';
 import PatientModuleConfig from './patient/patientModuleConfig';
 import QuickMedicalHistoryModuleConfig from './quick-medical-history/quick-medical-historyModuleConfig';
+import  UserAreaModuleConfig  from 'app/modules/user-area/user-areaModuleConfig';
+import  UserPositionModuleConfig  from 'app/modules/user-position/user-positionModuleConfig';
 
 const modulesConfigs: any[] = [
     AuthModuleConfig,
@@ -14,6 +16,8 @@ const modulesConfigs: any[] = [
     MedicalSpecialtiesConfig,
     PatientModuleConfig,
     QuickMedicalHistoryModuleConfig,
+    UserPositionModuleConfig,
+    UserAreaModuleConfig,
     //Home should Be last
     HomeModuleConfig
 ];
